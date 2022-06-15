@@ -7,6 +7,7 @@ on:
     branches: ["*", "!dev"]
 
 env:
+  PROJECT_SLUG: acme
   CARGO_TERM_COLOR: always
 
 jobs:
@@ -17,9 +18,9 @@ jobs:
       - name: Login
         run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }}
       - name: Test
-        run: cargo test --package acme
+        run: cargo test -p $PROJECT_SLUG -v --color $CARGO_TERM_COLOR
       - name: Build and Push
-        run: cargo publish --package acme
+        run: cargo publish -p $PROJECT_SLUG
   acme-core:
     runs-on: ubuntu-latest
     steps:

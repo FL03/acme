@@ -20,7 +20,7 @@ path = "tests/test.rs"
 test = true
 
 [dependencies]
-acme-core = "0.1.4"
+acme-core = { path = "../core" }
 bson = "2.3.0"
 chrono = "0.4.19"
 serde = { features = ["derive"], version = "1.0.137" }

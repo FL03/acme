@@ -6,9 +6,7 @@ fn basic() {
 }
 
 #[test]
-fn test_datetime() {
-    use acme_core::{types, utils};
-
-    let ts: types::TimeStamp = utils::timestamp();
-    assert_eq!(ts.clone(), ts.clone())
+fn test_timestamp() {
+    let ts: acme_core::TimeStamp = acme_core::utils::timestamp();
+    assert_eq!(&ts, &ts)
 }

@@ -5,8 +5,6 @@ edition = "2021"
 keywords = ["blockchain", "toolkit"]
 license = "MIT"
 name = "acme-core"
-readme = "README.md"
-repository = "https://github.com/FL03/acme/crates/core"
 version = "0.1.6" # TODO - Current Release v0.1.5
 
 [lib]

@@ -1,9 +1,11 @@
+/*
+    Module: blockchain
+    Overview:
+        Scaffold the framework for the implementation of highly optimized, zk-Knowledge blockchains
+        that remain EVM compatible
+ */
+mod blocks;
+mod chains;
+
 pub use blocks::*;
-pub use blocks::Block;
 pub use chains::*;
-pub use chains::*;
-
-pub mod blocks;
-pub mod chains;
-pub mod utils;
-
