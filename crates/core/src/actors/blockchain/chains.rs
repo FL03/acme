@@ -3,7 +3,8 @@ use crate::BoxedError;
 
 use serde::{Deserialize, Serialize};
 
-pub trait StandardChainSpec {
+pub trait Chains {
+    type Account;
     type Block;
     type Configuration;
 
@@ -16,7 +17,8 @@ pub struct Chain {
     blocks: Vec<Block>,
 }
 
-impl StandardChainSpec for Chain {
+impl Chains for Chain {
+    type Account = ();
     type Block = ();
     type Configuration = ();
 

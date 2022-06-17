@@ -16,5 +16,13 @@ pub struct Name {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct User {
     pub id: ObjectId,
-    pub key: String
-} 
+    pub key: String,
+}
+
+pub trait UserSpecification {
+    type Identity;
+    type Condition;
+    type Context;
+
+    fn authorize(&self) -> Self::Condition;
+}

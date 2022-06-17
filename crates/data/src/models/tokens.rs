@@ -11,3 +11,12 @@ pub struct Token {
     kind: Tokens,
     token: String,
 }
+
+pub trait TokenSpecification {
+    type Actor;
+    type Client;
+    type Context;
+    type Data;
+
+    fn create(&self) -> Self;
+}
