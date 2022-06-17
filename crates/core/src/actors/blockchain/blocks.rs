@@ -23,7 +23,7 @@ pub trait BlockSpec {
     type Nonce;
     type Timestamp;
 
-    fn compute(&self) -> Vec<u8>;
+    fn calculate_hash(&self) -> Vec<u8>;
     fn create(&self, data: Self::Data, nonce: Self::Nonce, previous: Self::Hash) -> Self;
     fn describe(&self);
 

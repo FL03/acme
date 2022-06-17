@@ -8,4 +8,9 @@
  */
 
 pub mod blockchain;
+
 pub use blockchain::*;
+
+mod loggers;
+
+pub use loggers::*;
