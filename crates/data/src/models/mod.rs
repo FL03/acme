@@ -3,6 +3,12 @@ pub use users::*;
 
 mod tokens;
 mod users;
+mod accounts;
+
+pub trait Model {
+    type Connection;
+    type Database;
+}
 
 pub mod constants {}
 
