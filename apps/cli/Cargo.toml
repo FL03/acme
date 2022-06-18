@@ -11,8 +11,8 @@ repository = "https://github.com/fl03/acme.git"
 version = "0.1.0"
 
 [dependencies]
-acme = { features = ["full"], version = "0.1.16" }
-clap = "3.1.18"
+acme = { features = ["full"], version = "0.1.18" }
+clap = { features = ["derive"], version = "3.1.18" }
 config = "0.13.1"
 tokio = { features = ["full"], version = "1.19.2" }
 tower = "0.4.12"

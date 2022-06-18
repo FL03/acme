@@ -10,4 +10,4 @@ FROM debian:buster-slim
 
 COPY --from=builder /bin/target/release/acme-cli /bin/acme-cli
 
-CMD ["./project/acme-cli"]
+ENTRYPOINT ["./project/acme-cli"]
