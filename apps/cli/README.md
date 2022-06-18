@@ -1,2 +1,2 @@
-# acme/apps:cli
+# acme/acme-cli
 
