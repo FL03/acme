@@ -4,9 +4,6 @@ mod mainnet;
 // TODO - Implement a standard IPFS Node
 mod subnet;
 
-pub mod constants {}
-
-pub mod types {}
 
 pub mod utils {
     use std::{env, error::Error, fs, path::Path, str::FromStr};

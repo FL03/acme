@@ -8,16 +8,13 @@ mod types {
 
     pub use libp2p::PeerId;
 
-    pub use crate::actors::constants::*;
-    pub use crate::behaviours::types::*;
-    pub use crate::crypto::types::*;
-
     // Authenticated DH Keys
     pub type AuthNoiseKey = libp2p::noise::AuthenticKeypair<CryptoSpec>;
     // Boxed Transport
     pub type BoxedTransport = Boxed<(PeerId, StreamMuxerBox)>;
     // Standard Network Encryption Specification
     pub type CryptoSpec = libp2p::noise::X25519Spec;
+    pub type Kad = libp2p::kad::Kademlia<libp2p::kad::store::MemoryStore>;
     // Wrapper for Multiaddr
     pub type NetworkAddress = libp2p::Multiaddr;
     // Wrapper for Noise Keypair

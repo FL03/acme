@@ -27,7 +27,7 @@ networking = [
 
 
 [dependencies]
-acme = { features = ["full"], path = "../../crates/acme" }
+acme = { features = ["full"], path = "../../crates/acme", verion = "0.1.19" }
 async-trait = "0.1.56"
 axum = { features = ["headers"], version = "0.5.7" }
 config = "0.13.1"

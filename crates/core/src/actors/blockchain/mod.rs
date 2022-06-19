@@ -10,6 +10,12 @@ mod chains;
 pub use blocks::*;
 pub use chains::*;
 
+pub const DIFFICULTY_PREFIX: &str = "00";
+
+pub type BlockData = String;
+pub type BlockId = crate::ObjectId;
+pub type BlockHash = String;
+pub type BlockNonce = u64;
 
 pub mod utils {
     use log::info;

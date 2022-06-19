@@ -1,5 +1,5 @@
 use super::Block;
-use crate::BoxedError;
+use crate::errors::BoxedError;
 
 use serde::{Deserialize, Serialize};
 

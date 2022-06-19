@@ -1,6 +1,6 @@
 use std::net::SocketAddr;
 
-use acme::BoxedError;
+use acme::errors::BoxedError;
 use async_trait::async_trait;
 use axum;
 use http::header;
