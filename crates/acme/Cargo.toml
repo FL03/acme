@@ -20,14 +20,9 @@ network = ["acme-network"]
 [lib]
 bench = false
 crate-type = ["cdylib", "rlib"]
+name = "acme"
+path = "src/lib.rs"
 test = true
-
-[[test]]
-name = "test"
-path = "tests/test.rs"
-test = true
-
-[dependencies]
 
 [dependencies.acme-core]
 optional = true
@@ -48,3 +43,8 @@ version = "0.1.6"
 optional = true
 path = "../network"
 version = "0.1.6"
+
+[[test]]
+name = "test"
+path = "tests/test.rs"
+test = true
