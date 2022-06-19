@@ -4,6 +4,12 @@ use serde::{Deserialize, Serialize};
 
 use crate::actors::{Logger, Server};
 
+pub trait Configurator {
+    type Application;
+
+    fn new(pattern: String) -> Result<Self, ConfigError>;
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Settings {
     pub logger: Logger,

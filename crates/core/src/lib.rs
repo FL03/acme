@@ -8,8 +8,11 @@
 pub mod actors;
 mod common;
 mod contexts;
+mod controllers;
 mod utils;
 
 pub use actors::*;
 pub use common::*;
+pub use contexts::*;
+pub use controllers::*;
 pub use utils::*;
