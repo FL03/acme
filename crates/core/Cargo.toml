@@ -5,6 +5,8 @@ edition = "2021"
 keywords = ["blockchain", "scsys", "toolkit"]
 license = "MIT"
 name = "acme-core"
+readme = "README.md"
+repository = "https://github.com/FL03/acme"
 version = "0.1.7" # TODO - Update package versioning before merging; current cargo crate version (v0.1.6)
 
 [lib]
