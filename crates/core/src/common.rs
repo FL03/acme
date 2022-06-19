@@ -5,7 +5,7 @@ pub use dates::*;
 pub use errors::*;
 
 
-mod blockchain {
+pub mod blockchain {
     pub const DIFFICULTY_PREFIX: &str = "00";
 
     pub type BlockData = String;
@@ -14,14 +14,14 @@ mod blockchain {
     pub type BlockNonce = u64;
 }
 
-mod dates {
+pub mod dates {
     use bson;
     use chrono;
 
     pub enum Dates {
         Datetime(chrono::DateTime<chrono::Local>),
         Localtime(chrono::Local),
-        Timestamp(bson::DateTime)
+        Timestamp(bson::DateTime),
     }
 
     pub type DateTime = chrono::DateTime<LocalTime>;
@@ -44,12 +44,12 @@ mod dates {
     }
 }
 
-mod errors {
+pub mod errors {
     use std::error::Error;
 
     pub enum Errors {
         Default(BoxedError)
     }
-    pub type BoxedError = Box<dyn Error>;
 
+    pub type BoxedError = Box<dyn Error>;
 }

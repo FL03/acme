@@ -1,11 +1,7 @@
 pub use constants::*;
 pub use types::*;
 
-mod constants {
-    pub use crate::actors::constants::*;
-    pub use crate::behaviours::constants::*;
-    pub use crate::crypto::constants::*;
-}
+mod constants {}
 
 mod types {
     use libp2p::{self, core::{muxing::StreamMuxerBox, transport::Boxed}};

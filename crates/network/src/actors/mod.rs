@@ -6,12 +6,6 @@ mod nodes;
 mod peers;
 mod providers;
 
-pub use node::*;
+pub use nodes::*;
 pub use peers::*;
 pub use providers::*;
-
-pub mod utils {
-    pub use super::nodes::utils::*;
-    pub use super::peers::utils::*;
-    pub use super::providers::utils::*;
-}
