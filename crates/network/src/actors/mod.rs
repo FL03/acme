@@ -5,16 +5,13 @@ pub use providers::Provider;
 mod nodes;
 mod peers;
 mod providers;
-pub mod utils;
 
-pub mod constants {
-    pub use super::nodes::constants::*;
-    pub use super::peers::constants::*;
-    pub use super::providers::constants::*;
-}
+pub use node::*;
+pub use peers::*;
+pub use providers::*;
 
-pub mod types {
-    pub use super::nodes::types::*;
-    pub use super::peers::types::*;
-    pub use super::providers::types::*;
+pub mod utils {
+    pub use super::nodes::utils::*;
+    pub use super::peers::utils::*;
+    pub use super::providers::utils::*;
 }

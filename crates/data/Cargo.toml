@@ -6,8 +6,8 @@ keywords = ["blockchain", "toolkit"]
 license = "MIT"
 name = "acme-data"
 readme = "README.md"
-repository = "https://github.com/FL03/acme/crates/data"
-version = "0.1.6" # TODO - Current Release v0.1.5
+repository = "https://github.com/FL03/acme"
+version = "0.1.7" # TODO - Current Release v0.1.6
 
 [lib]
 bench = false

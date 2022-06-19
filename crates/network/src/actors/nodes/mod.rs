@@ -3,13 +3,36 @@
     Module:
 
  */
-pub use actor::*;
 
-mod actor;
-mod specs;
 
-pub mod constants {}
+pub enum Nodes {
+    Full,
+    Light
+}
 
-pub mod types {}
+pub enum NodeStates {
+    Computing,
+    Controlling
+}
 
-pub mod utils {}
+pub trait NodeSpecification {
+    type Appellation;
+    type Client;
+    type Configuration;
+    type Data;
+
+    fn activate(appellation: Self::Appellation) -> Self;
+    fn configure(configuration: Self::Configuration) -> Self;
+    fn connect(&mut self) -> Self::Client;
+    fn destroy(&mut self) -> Self::Data;
+}
+
+#[derive(Clone, Debug)]
+pub struct Node {
+    pub appellation: String
+}
+
+
+pub mod utils {
+
+}

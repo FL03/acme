@@ -2,7 +2,7 @@ use crate::{
     kad::{AddProviderOk, KademliaEvent, PeerRecord, PutRecordOk, QueryResult, Record},
     NetworkBehaviour,
     NetworkBehaviourEventProcess,
-    types::Kad,
+    Kad,
 };
 
 #[derive(NetworkBehaviour)]

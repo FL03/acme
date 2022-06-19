@@ -1,4 +1,12 @@
-// Import from library
+
+
+mod actors;
+mod behaviours;
+mod common;
+mod consensus;
+mod crypto;
+mod utils;
+
 pub use libp2p::{
     kad,
     NetworkBehaviour,
@@ -6,12 +14,8 @@ pub use libp2p::{
     Transport,
 };
 
-pub use actors::{Node, Peer, Provider};
-pub use primitives::constants;
-pub use primitives::types;
-
-mod actors;
-mod behaviours;
-mod crypto;
-mod primitives;
-pub mod utils;
+pub use actors::*;
+pub use behaviours::*;
+pub use common::*;
+pub use consensus::*;
+pub use crypto::*;

@@ -7,23 +7,18 @@
             - Generally describe the fundamental actors that are being leveraged throughout
  */
 
-pub mod blockchain;
-
-pub use blockchain::*;
-
+mod blockchain;
 mod loggers;
 
+pub use blockchain::*;
 pub use loggers::*;
 
 pub trait Actor {
-    type Identity;
-    type Classification;
-    type Computation;
-    type Determinate;
-    type State;
+    type Appellation; // Defining the actor's name
+    type Conduct; // Defining the actor's behaviour
+    type Configuration; // Defining a new method of identifying an external actor
+    type Data; // Define the standard format of data for the actor
 
-    fn client(&self, identity: Self::Identity) -> Self;
-    fn compute(&self, computation: Self::Computation) -> Self::Determinate;
-    fn determine(&self, req: String) -> Self::Determinate;
+    fn activate(appellation: Self::Appellation, configuration: Self::Configuration) -> Self;
 }
 

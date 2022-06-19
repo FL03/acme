@@ -3,7 +3,7 @@ use libp2p::{
     mdns::{Mdns, MdnsEvent},
 };
 
-use crate::{NetworkBehaviour, NetworkBehaviourEventProcess, types::Kad};
+use crate::{NetworkBehaviour, NetworkBehaviourEventProcess, Kad};
 
 #[derive(NetworkBehaviour)]
 #[behaviour(event_process = true)]

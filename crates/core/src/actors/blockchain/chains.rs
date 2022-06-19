@@ -3,13 +3,21 @@ use crate::BoxedError;
 
 use serde::{Deserialize, Serialize};
 
-pub trait Chains {
-    type Account;
-    type Block;
-    type Configuration;
+pub enum ChainStates {
+    Appending,
+    Computing,
+    Connecting,
+    Determining
+}
 
-    fn activate(configuration: Self::Configuration) -> Self;
-    fn client() -> Result<(), BoxedError>;
+pub trait ChainSpecification {
+    type Appellation; // Define the Chain's name
+    type Conduct; // Define the standard behaviour for the Chain
+    type Configuration; // Type of configuration for the Chain
+    type Data; // Define the standard data structure to be use throughout the Chain
+
+    fn activate(appellation: Self::Appellation, configuration: Self::Configuration) -> Self;
+    fn client(&mut self) -> Result<(), BoxedError>;
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -17,16 +25,3 @@ pub struct Chain {
     blocks: Vec<Block>,
 }
 
-impl Chains for Chain {
-    type Account = ();
-    type Block = ();
-    type Configuration = ();
-
-    fn activate(configuration: Self::Configuration) -> Self {
-        todo!()
-    }
-
-    fn client() -> Result<(), BoxedError> {
-        todo!()
-    }
-}

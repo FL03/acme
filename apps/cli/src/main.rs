@@ -22,6 +22,7 @@ struct Args {
 
 // TODO - Create a well-designed input structure
 struct Commands {
+    file_path: String,
     port: u16,
     name: String,
 }

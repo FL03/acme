@@ -2,10 +2,10 @@
 authors = ["FL03 <jo3mccain@icloud.com>"]
 description = "Core package of Acme, an all-in-one developer toolkit targetting decentralized environments"
 edition = "2021"
-keywords = ["blockchain", "toolkit"]
+keywords = ["blockchain", "scsys", "toolkit"]
 license = "MIT"
 name = "acme-core"
-version = "0.1.6" # TODO - Current Release v0.1.5
+version = "0.1.7" # TODO - Update package versioning before merging; current cargo crate version (v0.1.6)
 
 [lib]
 bench = false
