@@ -17,6 +17,7 @@ pub type BlockId = crate::ObjectId;
 pub type BlockHash = String;
 pub type BlockNonce = u64;
 
+
 pub mod utils {
     use log::info;
     use serde_json::json;
@@ -24,6 +25,7 @@ pub mod utils {
 
     use crate::TimeStamp;
     use super::{DIFFICULTY_PREFIX, BlockData, BlockId, BlockNonce, BlockHash};
+
 
     // Calculate the hash of a Block using standard Block parameters
     pub fn calculate_hash(id: BlockId, data: BlockData, nonce: BlockNonce, previous: BlockHash, timestamp: TimeStamp) -> Vec<u8> {

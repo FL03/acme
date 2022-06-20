@@ -6,4 +6,3 @@ pub enum Loggers {
     Debug,
     Info,
     Tracing,
-}
