@@ -12,8 +12,7 @@ use serde::{Deserialize, Serialize};
 
 // TODO - Finish implementing the block specification
 pub trait BlockSpec {
-    type BlockId;
-    type BlockHash;
+    type Index;
     type Data;
     type Hash;
     type Nonce;
@@ -23,7 +22,7 @@ pub trait BlockSpec {
     fn create(&self, data: Self::Data, nonce: Self::Nonce, previous: Self::Hash) -> Self;
     fn describe(&self);
 
-    fn fetch(&self, id: Self::BlockId) -> Self;
+    fn fetch(&self, index: Self::Index) -> Self;
 }
 
 #[derive(Clone, Debug, Deserialize, Hash, Serialize)]
@@ -43,5 +42,9 @@ impl Block {
         let timestamp = timestamp();
 
         Self { id, data, hash, nonce, previous, timestamp }
+    }
+
+    pub fn consensus() -> Self {
+        todo!()
     }
 }

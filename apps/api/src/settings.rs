@@ -7,7 +7,7 @@ use crate::actors::{Logger, Server};
 pub trait Configurator {
     type Application;
 
-    fn new(pattern: String) -> Result<Self, ConfigError>;
+    fn new(pattern: String) -> Result<Self, ConfigError> where Self: Sized;
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use acme::{LocalTime, TimeStamp};
+use acme::timestamp;
 use axum;
 use serde_json::{json, Value};
 
@@ -14,7 +14,7 @@ pub fn create_route() -> axum::Router {
 
 pub async fn base() -> axum::Json<Value> {
     let mut cache: Dictionary<String> = Dictionary::new();
-    let timestamp: TimeStamp = LocalTime::now().into();
+    let timestamp = timestamp();
     cache.insert(String::from("timestamp"), timestamp.to_string());
     axum::Json(
         json!(cache)

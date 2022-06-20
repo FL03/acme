@@ -1,10 +1,9 @@
-pub struct Logger {
-    pub level: String,
-}
+pub mod logger;
 
-pub trait LoggerSpec {
-    type Level;
-    type Settings;
+pub use logger::*;
 
-    fn setup(&self, settings: Self::Settings) -> Self;
+pub enum Loggers {
+    Debug,
+    Info,
+    Tracing,
 }

@@ -33,11 +33,13 @@ mod common {
 }
 
 pub mod errors {
+    pub use config::ConfigError;
     use std::error::Error;
 
     pub enum Errors {
         Default(BoxedError)
     }
 
+    pub type AsyncError = Box<dyn Error + Send + Sync + 'static>;
     pub type BoxedError = Box<dyn Error>;
 }
