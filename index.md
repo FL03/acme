@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to ACME
 
-You can use the [editor on GitHub](https://github.com/FL03/acme/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Inspired by projects like the Ignite CLI for the Cosmos Network and Substrate from Parity for Polkadot, ACME seeks to achieve a number of similar goals while maintaining a more rigourous set of fundamentals for creating elegant decentralized applications and ecosystems while supporting a number of alternative methodologies and architectures.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The SDK was created to support the on-going efforts of Scattered-Systems enabling developers to quickly create micro-chains designed for optimized preformance computational preformance on our Ethereum Native Blockchain, Aether.
 
 ### Markdown
 
