@@ -18,7 +18,7 @@ bson = { features = ["chrono-0_4", "serde_with"], version = "2.3.0" }
 chrono = "0.4.19"
 config = "0.13.1"
 hyper = { features = ["full"], version = "0.14.19" }
-libp2p = { features = ["dns-tokio", "tcp-tokio"], version = "0.45.1" }
+libp2p = { features = ["dns-tokio", "tcp-tokio"], version = "0.46.1" }
 log = "0.4.17"
 once_cell = "1.12.0"
 pretty_env_logger = "0.4.0"
