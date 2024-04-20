@@ -10,7 +10,7 @@ pub fn handle_item(item: &Item, var: &Ident) -> TokenStream {
     match item {
         Item::Fn(inner) => handle_item_fn(inner, var),
 
-        _ => panic!("Unsupported item!"),
+        _ => panic!("Currently only able to handle function items"),
     }
 }
 
@@ -26,7 +26,6 @@ pub fn handle_item_fn(item: &ItemFn, var: &Ident) -> TokenStream {
             }
         }
     }
-    println!("\n\n****\nITEM_FN\n****");
 
     handle_block(block, var)
 }

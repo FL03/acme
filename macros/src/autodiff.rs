@@ -15,15 +15,12 @@ pub fn impl_autodiff(partial: &PartialAst) -> TokenStream {
     // }
     match expr {
         PartialFn::Expr(inner) => {
-            println!("******* EXPR ********");
             expr::handle_expr(inner, var)
         }
         PartialFn::Item(inner) => {
-            println!("******* ITEM_FN ********");
             item::handle_item(&inner.clone().into(), var)
         }
         PartialFn::Custom(_inner) => {
-            println!("******* CUSTOM ********");
             panic!("Custom functions not yet supported")
         }
     }
