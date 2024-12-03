@@ -33,8 +33,6 @@ jobs:
         with:
           cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           cache-workspaces: true
-          target: ${{ matrix.target }}
-          toolchain: ${{ matrix.toolchain }}
       - 
         name: publish (${{ env.PACKAGE }})
         run: cargo publish --all-features -v -p ${{ env.PACKAGE }}
