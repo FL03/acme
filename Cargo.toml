@@ -28,7 +28,7 @@ keywords = [ ]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/acme.git"
-version = "0.3.0"
+version = "0.4.0"
 
 [profile.dev]
 codegen-units = 256
