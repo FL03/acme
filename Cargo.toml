@@ -19,16 +19,16 @@ smart_default = "0.7"
 thiserror = "2"
 
 [workspace.package]
-authors = ["FL03 <jo3mccain@icloud.com>",]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered Systems <support@scsys.io>"]
 categories = [ ]
-description = "rsdiff aims to be a complete autodifferentiation solution for Rust."
+description = "An automated content management engine (acme)"
 edition = "2021"
-homepage = "https://github.com/FL03/rsdiff/wiki"
+homepage = "https://github.com/scattered-systems/acme/wiki"
 keywords = [ ]
 license = "Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/FL03/rsdiff.git"
-version = "0.0.0"
+repository = "https://github.com/scattered-systems/acme.git"
+version = "0.3.0"
 
 [profile.dev]
 codegen-units = 256

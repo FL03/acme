@@ -4,14 +4,14 @@
 [![docs.rs](https://docs.rs/acme/badge.svg)](https://docs.rs/acme)
 [![license](https://img.shields.io/crates/l/acme.svg)](https://crates.io/crates/acme)
 
-[![clippy](https://github.com/FL03/acme/actions/workflows/clippy.yml/badge.svg)](https://github.com/FL03/acme/actions/workflows/clippy.yml)
-[![rust](https://github.com/FL03/acme/actions/workflows/rust.yml/badge.svg)](https://github.com/FL03/acme/actions/workflows/rust.yml)
+[![clippy](https://github.com/scattered-systems/acme/actions/workflows/clippy.yml/badge.svg)](https://github.com/scattered-systems/acme/actions/workflows/clippy.yml)
+[![rust](https://github.com/scattered-systems/acme/actions/workflows/rust.yml/badge.svg)](https://github.com/scattered-systems/acme/actions/workflows/rust.yml)
 
 ***
 
 _**The library is currently in the early stages of development and is not yet ready for production use.**_
 
-rsdiff aims to be a complete autodifferentiation solution for Rust.
+`acme` is an automatic content/configuration management engine.
 
 ## Features
 
@@ -24,7 +24,7 @@ rsdiff aims to be a complete autodifferentiation solution for Rust.
 Start by cloning the repository
 
 ```bash
-git clone https://github.com/FL03/acme.git
+git clone https://github.com/scattered-systems/acme.git
 cd acme
 ```
 
@@ -47,7 +47,7 @@ Add this to your `Cargo.toml`:
 ```toml
 [dependencies.acme]
 features = []
-version = "0.1.0"
+version = "0.3.0"
 ```
 
 ### Examples
