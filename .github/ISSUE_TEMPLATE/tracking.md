@@ -1,16 +1,18 @@
 ---
+name: Tracking Issue
 about: Create a new tracking issue to track the progress of a proposal or feature.
 labels: [ tracking ]
-name: Tracking Issue
-title: 'Tracking Issue:'
+title: 'Tracking issue for '
+type: feature
 ---
+## Overview
 
 _Describe the proposal or feature that this issue is tracking._
 
-## Issues
+## Motivation
 
-- [ ]
+_Explain why this proposal or feature is important. What problem does it solve?_
 
-## Pull Requests
+## Progress
 
-- [ ]
+_Track the progress of the proposal or feature. You can use checkboxes to indicate completion of different tasks._
