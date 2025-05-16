@@ -1,32 +1,28 @@
 [workspace]
-default-members = [
-    "acme"
-]
+default-members = ["acme"]
 
-exclude = [ ]
+exclude = []
 
-members = [
-    "acme", "core",
-]
+members = ["acme", "core"]
 
 resolver = "3"
 
 [workspace.package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered Systems <support@scsys.io>"]
-categories = [ ]
+categories = []
 description = "An automated content management engine (acme)"
 edition = "2024"
 homepage = "https://github.com/FL03/acme/wiki"
-keywords = [ "wasm", "management", "computing" ]
+keywords = ["computing", "management", "wasm"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/FL03/acme.git"
 version = "0.4.0"
 
 [workspace.dependencies]
+# sdk
 acme = { default-features = false, path = "acme" }
 acme-core = { default-features = false, path = "core" }
-
 
 # data & serialization
 bincode = { default-features = false, version = "2" }
@@ -46,6 +42,14 @@ strum = { default-features = false, features = ["derive"], version = "0.27" }
 chrono = { default-features = false, version = "0.4" }
 humantime = { default-features = false, version = "2" }
 time = { default-features = false, version = "0.3" }
+# random
+getrandom = { default-features = false, version = "0.3" }
+rand = { default-features = false, version = "0.9" }
+rand_distr = { default-features = false, version = "0.5" }
+# math
+num = { default-features = false, version = "0.4" }
+num-complex = { default-features = false, version = "0.4" }
+num-traits = { default-features = false, version = "0.2" }
 
 [profile.dev]
 codegen-units = 256
@@ -53,10 +57,10 @@ debug = true
 debug-assertions = true
 incremental = true
 lto = false
-panic = 'unwind'
-rpath = false
 opt-level = 0
 overflow-checks = true
+panic = 'unwind'
+rpath = false
 
 [profile.release]
 codegen-units = 16
@@ -64,7 +68,7 @@ debug = false
 debug-assertions = false
 incremental = false
 lto = true
-panic = 'abort'
-rpath = false
 opt-level = "z"
 overflow-checks = false
+panic = 'abort'
+rpath = false

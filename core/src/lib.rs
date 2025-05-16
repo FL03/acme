@@ -9,19 +9,73 @@
 extern crate alloc;
 
 #[doc(inline)]
-pub use self::error::*;
+pub use self::{consts::*, error::*, events::prelude::*, traits::prelude::*, types::prelude::*, utils::prelude::*};
+
+#[macro_use]
+pub(crate) mod seal;
 
 pub mod error;
+pub mod events;
 
-pub mod consts {}
+pub mod consts {
+    #[doc(hidden)]
+    pub const VERSION: &str = env!("CARGO_PKG_VERSION");
+}
 
-pub mod traits {}
+pub mod traits {
+    #[doc(inline)]
+    pub use self::prelude::*;
 
-pub mod types {}
+    pub mod context;
+    pub mod handle;
 
-pub mod utils {}
+    pub(crate) mod prelude {
+        #[doc(inline)]
+        pub use super::context::*;
+        #[doc(inline)]
+        pub use super::handle::*;
+    }
+}
 
+pub mod types {
+    #[doc(inline)]
+    pub use self::prelude::*;
+
+    pub mod container;
+
+    pub(crate) mod prelude {
+        #[doc(inline)]
+        pub use super::container::*;
+    }
+}
+
+pub mod utils {
+    #[doc(inline)]
+    pub use self::prelude::*;
+
+    pub mod generate;
+    pub mod time;
+
+    pub(crate) mod prelude {
+        #[doc(inline)]
+        pub use super::generate::*;
+        #[doc(inline)]
+        pub use super::time::*;
+    }
+}
+
+#[allow(unused_imports)]
 pub mod prelude {
     #[doc(no_inline)]
+    pub use crate::consts::*;
+    #[doc(no_inline)]
     pub use crate::error::*;
+    #[doc(no_inline)]
+    pub use crate::events::prelude::*;
+    #[doc(no_inline)]
+    pub use crate::traits::prelude::*;
+    #[doc(no_inline)]
+    pub use crate::types::prelude::*;
+    #[doc(no_inline)]
+    pub use crate::utils::prelude::*;
 }

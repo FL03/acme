@@ -28,10 +28,15 @@ full = [
 alloc = [
     "serde?/alloc",
     "serde_json?/alloc",
+    "time?/alloc",
 ]
 
-anyhow = [
-    "dep:anyhow",
+anyhow = [ "dep:anyhow" ]
+
+chrono = [
+    "dep:chrono",
+    "std",
+    "time",
 ]
 
 json = [
@@ -39,19 +44,41 @@ json = [
     "dep:serde_json",
 ]
 
+rand = [
+    "dep:rand",
+    "dep:rand_distr",
+    "rng",
+    "time?/rand"
+]
+
+rng = [
+    "dep:getrandom",
+    "rand?/small_rng"
+]
+
 serde = [
     "dep:serde",
     "dep:serde_derive",
+    "time?/serde",
 ]
+
+time = ["dep:time"]
 
 # ********* [FF] Environments *********
 std = [
     "alloc",
     "anyhow?/std",
+    "rand?/std",
     "serde?/std",
     "serde_json?/std",
     "strum/std",
     "thiserror/std",
+    "time?/std",
+]
+
+wasm = [
+    "getrandom?/wasm_js",
+    "time?/wasm-bindgen"
 ]
 
 [dependencies]
@@ -65,6 +92,13 @@ thiserror = { workspace = true }
 # macros
 smart-default = { workspace = true }
 strum = { features = ["derive"], workspace = true }
+# time
+chrono = { optional = true, workspace = true }
+time = { optional = true, workspace = true }
+# random
+getrandom = { optional = true, workspace = true }
+rand = { optional = true, workspace = true }
+rand_distr = { optional = true, workspace = true }
 
 [package.metadata.docs.rs]
 all-features = false
