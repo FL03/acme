@@ -3,41 +3,83 @@
 **/.artifacts/data/
 **/.docker/data/
 
-# Language Specific
 
-## Node.js
-**/.DS_STORE
-**/build
+## Caches
+
+**/.cache/
+
+# Configuration Files
+
+**/config.*
+**/*.config.*
+
+**/*.env
+**/*.env.*
+
+### Exceptions
+!**/default.config.*
+!**/*.config.cjs
+!**/*.config.js
+!**/*.config.mjs
+!**/config.py
+!**/config.rs
+
+!**/example.env.*
+!**/*.env.example
+!**/*.env.default
+
+# Dev
+
+### Idea
+
+**/.idea/
+
+### vscode
+
+**/.vscode/
+
+# File Extensions
+
+**/*.lock
+**/*.lock.*
+
+**/*-lock.*
+
+**/*.log
+**/*.log.*
+
+### Data Files
+
+**/*.csv
+**/*.csv.*
+
+**/*.db
+**/*.db.*
+
+**/*.db-*.*
+
+**/*.zip
+**/*.zip.*
+
+## Rust
+**/debug/
+**/target/
+
+**/*.bk
+**/*.bk.*
+
+!Cargo.lock
+
+## Node
+**/build/
 **/debug/
 **/dist/
-**/node_modules
-
-**/*.tsbuildinfo
-
-**/package-lock.json
-**/yarn.lock
-
-### Dependencies
-**/.pnp
-**/.pnp.*
-
-**/.yarn/install-state.gz
-
-### Frameworks
-
-#### Next.js
-**/.next
-**/out
-
-**/next-env.d.ts
+**/node_modules/
 
 ### SvelteKit
 **/__sapper__/
 **/.DS_STORE/
 **/.svelte-kit/
-
-### Package Manager
-**/yarn-error.log
 
 ## Python
 **/__pycache__/
@@ -64,99 +106,7 @@
 **/*.whl
 **/*.whl.*
 
-## Rust
-**/target
-
-**/Cargo.lock
-
-**/*.rs.bk
-**/*.rs.bk.*
-
-# Miscellaneous
-
-## Development
-
-### Configuration
-**/.config/*.config.*
-
-!**/.config/default.config.*
-!**/.config/docker.config.*
-!**/.config/example.config.*
-
-#### dotenv
-**/.env.*
-**/*.env
-**/*.env.*
-
-!**/.env.default*
-!**/*default.env
-
-!**/*.env.example
-!**/*.env.example.*
-
-!**/*.example.env
-!**/*.example.env.*
-
-### IDE
-
-#### Atom
-**/.atom
-
-#### JetBrains
-**/.idea
-
-**/*.iml
-**/*.ipr
-**/*.iws
-
-#### Visual Studio Code
-**/.vscode
-
-### Integrations
-
-#### Supabase
-**/supabase/temp
-
-#### Vercel
-**/.vercel
-
-## Directories
-**/build
-**/debug
-**/dist
-**/release
-
-### testing
-**/coverage
-
-## File Extensions
-**/*.bak
-**/*.bak.*
-
-**/*.bk
-**/*.bk.*
-
-**/*.db
-
-
-
-**/*.log
-**/*.log.*
-
-**/*.pem
-
-**/*.gz
-
-**/*.sqlite
-
-**/*.zip
-
 ## Operating Systems
 
-### NixOs
-!**/flake.lock
-
-### Windows
-
-#### Windows Subsystem for Linux (WSL)
-**/*:Zone.identifier
+### Windows (WSL2)
+**/*:Zone.Identifier

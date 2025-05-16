@@ -1,10 +1,10 @@
 ---
 name: Bug report
 about: Create a report to help us improve
+assignees: [ FL03 ]
 title: 'Bug Report: '
 labels: [ bug ]
-assignees: [ FL03 ]
-
+type: issue
 ---
 
 **Describe the bug**

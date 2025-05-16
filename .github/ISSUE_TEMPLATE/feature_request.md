@@ -1,9 +1,10 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+assignees: [ FL03 ]
 labels: [ enhancement ]
-
+title: ''
+type: feature
 ---
 
 **Is your feature request related to a problem? Please describe.**

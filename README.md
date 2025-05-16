@@ -1,17 +1,14 @@
 # acme
 
-[![crates.io](https://img.shields.io/crates/v/acme.svg)](https://crates.io/crates/acme)
-[![docs.rs](https://docs.rs/acme/badge.svg)](https://docs.rs/acme)
-[![license](https://img.shields.io/crates/l/acme.svg)](https://crates.io/crates/acme)
-
-[![clippy](https://github.com/scattered-systems/acme/actions/workflows/clippy.yml/badge.svg)](https://github.com/scattered-systems/acme/actions/workflows/clippy.yml)
-[![rust](https://github.com/scattered-systems/acme/actions/workflows/rust.yml/badge.svg)](https://github.com/scattered-systems/acme/actions/workflows/rust.yml)
+[![crates.io](https://img.shields.io/crates/v/acme?logo=rust&style=for-the-badge)](https://crates.io/crates/acme)
+[![docs.rs](https://img.shields.io/docsrs/acme?style=for-the-badge&logo=rust)](https://docs.rs/acme)
+![license](https://img.shields.io/crates/l/acme?logo=rust&style=for-the-badge)
 
 ***
 
-_**The library is currently in the early stages of development and is not yet ready for production use.**_
+_**Warning: the project is currently in the early stages of development and not yet suitable for production use-cases**_
 
-`acme` is an automatic content/configuration management engine.
+`acme` is an automatic content management engine 
 
 ## Features
 
@@ -21,23 +18,30 @@ _**The library is currently in the early stages of development and is not yet re
 
 ### Building from the source
 
-Start by cloning the repository
+Start by cloning the repository:
 
 ```bash
-git clone https://github.com/scattered-systems/acme.git
+git clone https://github.com/FL03/acme.git
+```
+
+Then, navigate to the project directory:
+
+```bash
 cd acme
 ```
 
-#### _Building the project_
+#### _cargo_
+
+To build the project, you can use the following command:
 
 ```bash
-cargo build --all-features -r -v --workspace
+cargo build --all-features --workspace [--release]
 ```
 
-#### _Running tests_
+To run the tests, you can use the following command:
 
 ```bash
-cargo test --all-features -r -v --workspace
+cargo test --all-features --workspace
 ```
 
 ## Usage
@@ -47,7 +51,7 @@ Add this to your `Cargo.toml`:
 ```toml
 [dependencies.acme]
 features = []
-version = "0.3.0"
+version = "0.4.0"
 ```
 
 ### Examples
