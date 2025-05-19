@@ -17,6 +17,8 @@ keywords = ["computing", "management", "wasm"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/FL03/acme.git"
+resolver = "3"
+rust-version = "1.70.0"
 version = "0.4.0"
 
 [workspace.dependencies]
@@ -46,10 +48,19 @@ time = { default-features = false, version = "0.3" }
 getrandom = { default-features = false, version = "0.3" }
 rand = { default-features = false, version = "0.9" }
 rand_distr = { default-features = false, version = "0.5" }
+uuid = { default-features = false, version = "1" }
 # math
 num = { default-features = false, version = "0.4" }
 num-complex = { default-features = false, version = "0.4" }
 num-traits = { default-features = false, version = "0.2" }
+# frameworks
+crossbeam = { default-features = false, version = "0.8" }
+rayon = { default-features = false, version = "1" }
+# async
+futures = { default-features = false, version = "0.3" }
+futures-util = { default-features = false, version = "0.3" }
+tokio = { default-features = false, version = "1" }
+tokio-util = { default-features = false, version = "0.7" }
 
 [profile.dev]
 codegen-units = 256

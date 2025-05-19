@@ -1,4 +1,5 @@
 [package]
+build = "build.rs"
 name = "acme-core"
 
 authors.workspace = true
@@ -11,6 +12,12 @@ license.workspace = true
 readme.workspace = true
 repository.workspace = true
 version.workspace = true
+
+[package.metadata.docs.rs]
+all-features = false
+features = ["full"]
+rustc-args = ["--cfg", "docsrs"]
+
 
 [features]
 default = [
@@ -53,7 +60,9 @@ rand = [
 
 rng = [
     "dep:getrandom",
-    "rand?/small_rng"
+    "rand?/small_rng",
+    "rand?/thread_rng",
+    "uuid?/v4",
 ]
 
 serde = [
@@ -64,21 +73,30 @@ serde = [
 
 time = ["dep:time"]
 
+uuid = [
+    "dep:uuid",
+    "rng"
+]
+
 # ********* [FF] Environments *********
 std = [
     "alloc",
     "anyhow?/std",
     "rand?/std",
+    "rand?/std_rng",
     "serde?/std",
     "serde_json?/std",
     "strum/std",
     "thiserror/std",
     "time?/std",
+    "uuid?/std"
 ]
 
 wasm = [
+    "chrono?/wasmbind",
     "getrandom?/wasm_js",
-    "time?/wasm-bindgen"
+    "time?/wasm-bindgen",
+    "uuid?/js"
 ]
 
 [dependencies]
@@ -90,6 +108,7 @@ serde_json = { optional = true, workspace = true }
 anyhow = { optional = true, workspace = true }
 thiserror = { workspace = true }
 # macros
+paste = { workspace = true }
 smart-default = { workspace = true }
 strum = { features = ["derive"], workspace = true }
 # time
@@ -99,11 +118,7 @@ time = { optional = true, workspace = true }
 getrandom = { optional = true, workspace = true }
 rand = { optional = true, workspace = true }
 rand_distr = { optional = true, workspace = true }
-
-[package.metadata.docs.rs]
-all-features = false
-features = ["full"]
-rustc-args = ["--cfg", "docsrs"]
+uuid = { optional = true, workspace = true }
 
 # ********* [tests] *********
 [[test]]

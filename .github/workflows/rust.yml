@@ -34,27 +34,22 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - 
-        name: checkout
+        name: Checkout
         uses: actions/checkout@v4
       - 
-        name: setup cache
-        uses: Swatinem/rust-cache@v2
-        with:
-          prefix-key: ${{ runner.os }}-cargo-
-      - 
-        name: setup rustup
+        name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           cache: true
           cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           cache-workspaces: true
       - 
-        name: build
+        name: Build the workspace
         run: cargo build -r -v --locked --workspace --all-features
       - 
-        name: test
+        name: Test the workspace
         run: cargo test -r -v --locked --workspace --all-features
       - 
-        name: bench
+        name: Benchmark
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: cargo bench -v --workspace --features full

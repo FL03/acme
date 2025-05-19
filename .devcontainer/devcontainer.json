@@ -7,7 +7,9 @@
   "name": "rust",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "customizations": {},
-  "forwardPorts": [],
+  "forwardPorts": [
+    "8080:8080"
+  ],
   "mounts": [],
   "features": {
     "ghcr.io/devcontainers/features/rust:1": {
