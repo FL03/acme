@@ -18,8 +18,12 @@ pub(crate) mod prelude {
 }
 
 /// a trait for denoting stateful entities
-pub trait Stateful {
-    type State: RawState;
+pub trait Stateful<Q> where Q: RawState {
+    type State<R>;
+
+    fn state(&self) -> Self::State<&Q>;
+
+    fn state_mut(&mut self) -> Self::State<&mut Q>;
 }
 
 /// [RawState]
@@ -34,9 +38,17 @@ impl<Q> RawState for State<Q> {
     type Inner = Q;
 }
 
-impl<Q, T> Stateful for Q
+impl<Q, T> Stateful<Q> for State<Q>
 where
     Q: RawState<Inner = T>,
 {
-    type State = Q;
+    type State<R> = State<R>;
+
+    fn state(&self) -> Self::State<&Q> {
+        self.view()
+    }
+
+    fn state_mut(&mut self) -> Self::State<&mut Q> {
+        self.view_mut()
+    }
 }

@@ -24,8 +24,8 @@ impl<Q> State<Q> {
     pub fn from_state(value: Q) -> Self {
         Self(value)
     }
-
-    pub fn is_state<R: 'static>(&self) -> bool
+    /// check if the current instance is of the given type
+    pub fn is_type_of<R: 'static>(&self) -> bool
     where
         Q: 'static,
     {
@@ -41,8 +41,16 @@ impl<Q> State<Q> {
         &mut self.0
     }
     /// consumes the current instance to return the inner value
-    pub fn into_inner(self) -> Q {
+    pub fn into_value(self) -> Q {
         self.0
+    }
+    /// applies the given function to the inner value and returns a new instance of the state
+    /// that wraps the output
+    pub fn map<R, F>(self, f: F) -> State<R>
+    where
+        F: FnOnce(Q) -> R,
+    {
+        State(f(self.0))
     }
     /// uses the [`replace`](core::mem::replace) method to update and return the inner value
     pub fn replace(&mut self, value: Q) -> Q {
@@ -65,13 +73,13 @@ impl<Q> State<Q> {
     pub fn with(self, value: Q) -> Self {
         Self(value)
     }
-    /// applies the given function to the inner value and returns a new instance of the state
-    /// that wraps the output
-    pub fn map<R, F>(self, f: F) -> State<R>
-    where
-        F: FnOnce(Q) -> R,
-    {
-        State(f(self.0))
+    /// returns a new instance of the state with a referenced inner valued
+    pub fn view(&self) -> State<&Q> {
+        State(self.get())
+    }
+
+    pub fn view_mut(&mut self) -> State<&mut Q> {
+        State(self.get_mut())
     }
 }
 

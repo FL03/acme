@@ -21,7 +21,7 @@ impl<T> Id<T> {
     pub fn from_value(id: T) -> Self {
         Self(id)
     }
-    #[cfg(feature = "rand")]
+    #[cfg(all(feature = "rand", feature = "std"))]
     pub fn random() -> Self
     where
         rand_distr::StandardUniform: rand_distr::Distribution<T>,

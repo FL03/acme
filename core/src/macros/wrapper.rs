@@ -3,20 +3,26 @@
     Contrib: @FL03
 */
 
-#[allow(unused_macros)]
+#[macro_export]
 macro_rules! wrapper {
     ($($S:ident($vis:vis $T:ident)),* $(,)?) => {
         $(
-            wrapper!(@impl $S($vis $T));
+            $crate::wrapper!(@def $S($vis $T));
+            $crate::wrapper!(@impl $S($vis $T));
+            $crate::wrapper!(@ext $S($vis $T));
         )*
     };
-    (@impl $S:ident($vis:vis $T:ident)) => {
+    (@def $S:ident($vis:vis $T:ident)) => {
         #[derive(Clone, Copy, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
-        #[cfg_attr(feature = "serde", derive(serde::Deserialize, serde::Serialize))]
+        #[cfg_attr(
+            feature = "serde", 
+            derive(serde::Deserialize, serde::Serialize),
+            serde(default, transparent),
+        )]
         #[repr(transparent)]
-        #[serde(default, transparent)]
         pub struct $S<$T>(pub $T);
-
+    };
+    (@impl $S:ident($vis:vis $T:ident)) => {
         impl<$T> $S<$T> {
             /// returns a new instance initialized with the default value
             pub fn new() -> Self
@@ -24,6 +30,10 @@ macro_rules! wrapper {
                 $T: Default,
             {
                 Self($T::default())
+            }
+            /// returns a new instance with the given value
+            pub fn from_value(value: $T) -> Self {
+                Self(value)
             }
             /// returns an immutable reference to the inner value
             pub const fn get(&self) -> &$T {
@@ -36,6 +46,14 @@ macro_rules! wrapper {
             /// consumes the current instance to return the inner value
             pub fn into_inner(self) -> $T {
                 self.0
+            }
+            /// applies the given function to the inner value and returns a new instance with
+            /// the result
+            pub fn map<R, F>(self, f: F) -> $S<R>
+            where
+                F: FnOnce($T) -> R,
+            {
+                $S(f(self.0))
             }
             /// uses the [`replace`](core::mem::replace) method to update and return the inner value
             pub fn replace(&mut self, value: $T) -> $T {
@@ -58,16 +76,17 @@ macro_rules! wrapper {
             pub fn with(self, value: $T) -> Self {
                 Self(value)
             }
-            /// applies the given function to the inner value and returns a new instance with
-            /// the result
-            pub fn map<R, F>(self, f: F) -> $S<R>
-            where
-                F: FnOnce($T) -> R,
-            {
-                $S(f(self.0))
+            /// captures a referenced value in a new instance
+            pub fn view(&self) -> $S<&$T> {
+                $S(self.get())
+            }
+            /// captures a mutable reference to the inner value
+            pub fn view_mut(&mut self) -> $S<&mut $T> {
+                $S(self.get_mut())
             }
         }
-
+    };
+    (@ext $S:ident($vis:vis $T:ident)) => {
         impl<$T> AsRef<$T> for $S<$T> {
             fn as_ref(&self) -> &$T {
                 self.get()
@@ -80,19 +99,19 @@ macro_rules! wrapper {
             }
         }
         
-        impl<$T> core::borrow::Borrow<$T> for $S<$T> {
+        impl<$T> ::core::borrow::Borrow<$T> for $S<$T> {
             fn borrow(&self) -> &$T {
                 self.get()
             }
         }
         
-        impl<$T> core::borrow::BorrowMut<$T> for $S<$T> {
+        impl<$T> ::core::borrow::BorrowMut<$T> for $S<$T> {
             fn borrow_mut(&mut self) -> &mut $T {
                 self.get_mut()
             }
         }
         
-        impl<$T> core::ops::Deref for $S<$T> {
+        impl<$T> ::core::ops::Deref for $S<$T> {
             type Target = $T;
         
             fn deref(&self) -> &Self::Target {
@@ -100,7 +119,7 @@ macro_rules! wrapper {
             }
         }
         
-        impl<$T> core::ops::DerefMut for $S<$T> {
+        impl<$T> ::core::ops::DerefMut for $S<$T> {
             fn deref_mut(&mut self) -> &mut Self::Target {
                 self.get_mut()
             }
