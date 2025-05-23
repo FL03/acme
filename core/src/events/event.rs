@@ -3,7 +3,6 @@
     Contrib: @FL03
 */
 
-
 #[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct EventBase<K, T> {
@@ -22,6 +21,4 @@ impl<K, T> EventBase<K, T> {
             _type: core::marker::PhantomData,
         }
     }
-
-    
 }

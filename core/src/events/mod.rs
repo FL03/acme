@@ -15,9 +15,7 @@ pub(crate) mod prelude {
     pub use super::{RawEvent, RawEventKind};
 }
 
-
 pub trait RawEventKind {
-
     private!();
 }
 

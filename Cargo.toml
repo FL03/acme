@@ -8,24 +8,39 @@ members = ["acme", "core"]
 resolver = "3"
 
 [workspace.package]
-authors = ["FL03 <jo3mccain@icloud.com>", "Scattered Systems <support@scsys.io>"]
+authors = [
+    "FL03 <jo3mccain@icloud.com>", 
+    "Scattered Systems <support@scsys.io>"
+]
 categories = []
-description = "An automated content management engine (acme)"
+description = "acme is an automated context management engine designed for the scsys ecosystem."
 edition = "2024"
 homepage = "https://github.com/FL03/acme/wiki"
-keywords = ["computing", "management", "wasm"]
+keywords = ["scsys", "wasm", "engine", "context", "management"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/FL03/acme.git"
 resolver = "3"
-rust-version = "1.70.0"
+rust-version = "1.85.0"
 version = "0.4.0"
 
 [workspace.dependencies]
 # sdk
 acme = { default-features = false, path = "acme" }
 acme-core = { default-features = false, path = "core" }
-
+# custom
+scsys = { default-features = false, features = ["derive", "macros"], version = "0.2.7" }
+scsys-derive = { default-features = false, version = "0.2.7" }
+# async
+futures = { default-features = false, version = "0.3" }
+futures-util = { default-features = false, version = "0.3" }
+tokio = { default-features = false, version = "1" }
+tokio-util = { default-features = false, version = "0.7" }
+# benchmarking
+criterion = { version = "0.6" }
+# concurrency & parallelism
+crossbeam = { default-features = false, version = "0.8" }
+rayon = { default-features = false, version = "1" }
 # data & serialization
 bincode = { default-features = false, version = "2" }
 bytes = { default-features = false, version = "1" }
@@ -48,29 +63,25 @@ time = { default-features = false, version = "0.3" }
 getrandom = { default-features = false, version = "0.3" }
 rand = { default-features = false, version = "0.9" }
 rand_distr = { default-features = false, version = "0.5" }
-uuid = { default-features = false, version = "1" }
+uuid = { default-features = false, version = "1.17" }
 # math
 num = { default-features = false, version = "0.4" }
 num-complex = { default-features = false, version = "0.4" }
 num-traits = { default-features = false, version = "0.2" }
-# frameworks
-crossbeam = { default-features = false, version = "0.8" }
-rayon = { default-features = false, version = "1" }
-# async
-futures = { default-features = false, version = "0.3" }
-futures-util = { default-features = false, version = "0.3" }
-tokio = { default-features = false, version = "1" }
-tokio-util = { default-features = false, version = "0.7" }
+# wasm (emscripten)
+js-sys = { default-features = false, version = "0.3" }
+wasm-bindgen = { default-features = false, version = "0.2" }
+
 
 [profile.dev]
 codegen-units = 256
 debug = true
 debug-assertions = true
 incremental = true
-lto = false
-opt-level = 0
+lto = 'thin'
+opt-level = 3
 overflow-checks = true
-panic = 'unwind'
+panic = 'abort'
 rpath = false
 
 [profile.release]
@@ -83,3 +94,4 @@ opt-level = "z"
 overflow-checks = false
 panic = 'abort'
 rpath = false
+strip = true

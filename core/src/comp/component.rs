@@ -3,7 +3,4 @@
     Contrib: @FL03
 */
 
-
-pub struct ComponentBase {
-    
-}
+pub struct ComponentBase {}

@@ -11,6 +11,7 @@ keywords.workspace = true
 license.workspace = true
 readme.workspace = true
 repository.workspace = true
+rust-version.workspace = true
 version.workspace = true
 
 [package.metadata.docs.rs]
@@ -31,8 +32,34 @@ full = [
     "serde"
 ]
 
+# ********* [FF] Environments *********
+std = [
+    "alloc",
+    "anyhow?/std",
+    "rand?/std",
+    "rand?/std_rng",
+    "scsys/std",
+    "serde?/std",
+    "serde_json?/std",
+    "strum/std",
+    "thiserror/std",
+    "time?/std",
+    "uuid?/std"
+]
+
+wasi = []
+
+wasm = [
+    "chrono?/wasmbind",
+    "getrandom?/wasm_js",
+    "time?/wasm-bindgen",
+    "uuid?/js",
+    "wasm-bindgen",
+]
+
 # ********* [FF] Dependencies *********
 alloc = [
+    "scsys/alloc",
     "serde?/alloc",
     "serde_json?/alloc",
     "time?/alloc",
@@ -48,7 +75,9 @@ chrono = [
 
 json = [
     "alloc",
-    "dep:serde_json",
+    "serde",
+    "serde_json",
+    "scsys/json",
 ]
 
 rand = [
@@ -68,8 +97,11 @@ rng = [
 serde = [
     "dep:serde",
     "dep:serde_derive",
+    "scsys/serde",
     "time?/serde",
 ]
+
+serde_json = ["dep:serde_json"]
 
 time = ["dep:time"]
 
@@ -78,28 +110,10 @@ uuid = [
     "rng"
 ]
 
-# ********* [FF] Environments *********
-std = [
-    "alloc",
-    "anyhow?/std",
-    "rand?/std",
-    "rand?/std_rng",
-    "serde?/std",
-    "serde_json?/std",
-    "strum/std",
-    "thiserror/std",
-    "time?/std",
-    "uuid?/std"
-]
-
-wasm = [
-    "chrono?/wasmbind",
-    "getrandom?/wasm_js",
-    "time?/wasm-bindgen",
-    "uuid?/js"
-]
+wasm-bindgen = ["dep:wasm-bindgen"]
 
 [dependencies]
+scsys = { workspace = true }
 # data & serialization
 serde = { features = ["derive"], optional = true, workspace = true }
 serde_derive = { optional = true, workspace = true }
@@ -119,6 +133,8 @@ getrandom = { optional = true, workspace = true }
 rand = { optional = true, workspace = true }
 rand_distr = { optional = true, workspace = true }
 uuid = { optional = true, workspace = true }
+# wasm
+wasm-bindgen = { optional = true, workspace = true }
 
 # ********* [tests] *********
 [[test]]

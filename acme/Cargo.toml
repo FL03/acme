@@ -11,6 +11,7 @@ keywords.workspace = true
 license.workspace = true
 readme.workspace = true
 repository.workspace = true
+rust-version.workspace = true
 version.workspace = true
 
 [lib]
@@ -44,12 +45,12 @@ std = [
     "acme-core/std",
 ]
 
-
 [dependencies]
 acme-core = { workspace = true }
 
 [dev-dependencies]
-criterion = { version = "0.5" }
+criterion = { workspace = true }
+lazy_static = { workspace = true }
 
 [package.metadata.docs.rs]
 all-features = false

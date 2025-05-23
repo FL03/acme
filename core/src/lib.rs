@@ -9,14 +9,13 @@
 extern crate alloc;
 
 #[doc(inline)]
-pub use self::{comp::prelude::*, consts::*, error::*, events::prelude::*, state::prelude::*, traits::prelude::*, types::prelude::*, utils::prelude::*};
+pub use self::{
+    comp::prelude::*, consts::*, error::*, events::prelude::*, traits::prelude::*,
+    types::prelude::*, utils::prelude::*,
+};
 
 #[macro_use]
 pub(crate) mod macros {
-    #[macro_use]
-    pub(crate) mod fmt;
-    #[macro_use]
-    pub(crate) mod gsw;
     #[macro_use]
     pub(crate) mod seal;
 }
@@ -24,8 +23,6 @@ pub(crate) mod macros {
 pub mod comp;
 pub mod error;
 pub mod events;
-pub mod state;
-
 
 pub mod consts {
     #[doc(hidden)]
@@ -79,17 +76,13 @@ pub mod utils {
 
 pub mod prelude {
     #[doc(no_inline)]
-    pub use crate::gsw;
+    pub use crate::comp::prelude::*;
     #[doc(no_inline)]
     pub use crate::consts::*;
     #[doc(no_inline)]
     pub use crate::error::*;
     #[doc(no_inline)]
-    pub use crate::comp::prelude::*;
-    #[doc(no_inline)]
     pub use crate::events::prelude::*;
-    #[doc(no_inline)]
-    pub use crate::state::prelude::*;
     #[doc(no_inline)]
     pub use crate::traits::prelude::*;
     #[doc(no_inline)]

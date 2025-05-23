@@ -128,9 +128,17 @@ impl<T> core::ops::DerefMut for Id<T> {
     }
 }
 
+impl<S> PartialEq<S> for Id
+where
+    usize: PartialEq<S>,
+{
+    fn eq(&self, other: &S) -> bool {
+        self.0.eq(other)
+    }
+}
 
-fmt_wrapper! {
-    Id<T> (
+scsys::fmt_wrapper! {
+    Id<T> {
         Binary("{:b}"),
         Debug("{:?}"),
         Display("{}"),
@@ -139,14 +147,5 @@ fmt_wrapper! {
         Octal("{:o}"),
         UpperExp("{:E}"),
         UpperHex("{:X}"),
-    )
-}
-
-impl<S> PartialEq<S> for Id
-where
-    usize: PartialEq<S>,
-{
-    fn eq(&self, other: &S) -> bool {
-        self.0.eq(other)
     }
 }
