@@ -2,16 +2,25 @@
     Appellation: acme-core <library>
     Contrib: @FL03
 */
-//! The core modules for the `acme` framework.
+//! The _core_ modules of the `acme` library; these modules are re-exported at the top-level of
+//! the library for convenience.
+#![allow(
+    clippy::missing_safety_doc,
+    clippy::module_inception,
+    clippy::needless_doctest_main,
+    clippy::upper_case_acronyms
+)]
 #![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std;
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
 #[doc(inline)]
 pub use self::{
-    comp::prelude::*, consts::*, error::*, events::prelude::*, traits::prelude::*,
-    types::prelude::*, utils::prelude::*,
+    comp::prelude::*, consts::*, error::*, events::prelude::*, traits::*, types::*, utils::*,
 };
 
 #[macro_use]
@@ -30,13 +39,14 @@ pub mod consts {
 }
 
 pub mod traits {
+    //! this module provides common traits and interfaces for the `acme` engine
     #[doc(inline)]
     pub use self::prelude::*;
 
-    pub mod context;
-    pub mod handle;
+    mod context;
+    mod handle;
 
-    pub(crate) mod prelude {
+    mod prelude {
         #[doc(inline)]
         pub use super::context::*;
         #[doc(inline)]
@@ -45,32 +55,28 @@ pub mod traits {
 }
 
 pub mod types {
+    //! this module implements various types used for the `acme` engine
     #[doc(inline)]
     pub use self::prelude::*;
 
-    pub mod container;
-    pub mod id;
+    mod container;
 
-    pub(crate) mod prelude {
+    mod prelude {
         #[doc(inline)]
         pub use super::container::*;
-        #[doc(inline)]
-        pub use super::id::*;
     }
 }
 
 pub mod utils {
+    //! this module defines additional utilities for the `acme` engine
     #[doc(inline)]
     pub use self::prelude::*;
 
-    pub mod generate;
-    pub mod time;
+    mod generate;
 
-    pub(crate) mod prelude {
+    mod prelude {
         #[doc(inline)]
         pub use super::generate::*;
-        #[doc(inline)]
-        pub use super::time::*;
     }
 }
 
@@ -80,13 +86,11 @@ pub mod prelude {
     #[doc(no_inline)]
     pub use crate::consts::*;
     #[doc(no_inline)]
-    pub use crate::error::*;
-    #[doc(no_inline)]
     pub use crate::events::prelude::*;
     #[doc(no_inline)]
-    pub use crate::traits::prelude::*;
+    pub use crate::traits::*;
     #[doc(no_inline)]
-    pub use crate::types::prelude::*;
+    pub use crate::types::*;
     #[doc(no_inline)]
-    pub use crate::utils::prelude::*;
+    pub use crate::utils::*;
 }

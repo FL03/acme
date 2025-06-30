@@ -4,17 +4,23 @@
 */
 //! # acme
 //!
-//! Welcome to `acme`! This library implements an automated container / context management
-//! system in Rust. The project is technically an extension of the on-going research project,
-//! [`eryon`](https://docs.rs/eryon), essentially materializing these core concepts into a
-//! functional computational framework.
+//! Welcome to `acme`! This crate is designed to be an efficient, flexible, and secure engine
+//! for automatically aggreating information from various sources, processing it, and
+//! distributing it to the appropriate consumers.
+#![allow(
+    clippy::missing_safety_doc,
+    clippy::module_inception,
+    clippy::needless_doctest_main,
+    clippy::upper_case_acronyms
+)]
 #![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std;
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
-/// The core modules of the `acme` library; these modules are re-imported at the top-level of
-/// the library fo convenience.
 #[doc(inline)]
 pub use acme_core::*;
 

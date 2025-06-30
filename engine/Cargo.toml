@@ -1,7 +1,7 @@
 [package]
 build = "build.rs"
-description = "the core modules for the acme platform"
-name = "acme-core"
+description = "the automatic content/context management engine implementation"
+name = "acme-engine"
 
 authors.workspace = true
 categories.workspace = true
@@ -21,7 +21,13 @@ rustc-args = ["--cfg", "docsrs"]
 version = "{{version}}"
 
 [dependencies]
+# local
+acme-core = { workspace = true }
+# custom
 scsys = { workspace = true }
+
+# async
+tokio = { features = ["sync"], optional = true, workspace = true }
 # data & serialization
 serde = { features = ["derive"], optional = true, workspace = true }
 serde_derive = { optional = true, workspace = true }
@@ -33,16 +39,16 @@ thiserror = { workspace = true }
 paste = { workspace = true }
 smart-default = { workspace = true }
 strum = { features = ["derive"], workspace = true }
-# time
-chrono = { optional = true, workspace = true }
-time = { optional = true, workspace = true }
-# tracing
-tracing = { optional = true, workspace = true }
 # random
 getrandom = { optional = true, workspace = true }
 rand = { optional = true, workspace = true }
 rand_distr = { optional = true, workspace = true }
 uuid = { optional = true, workspace = true }
+# time
+chrono = { optional = true, workspace = true }
+time = { optional = true, workspace = true }
+# tracing
+tracing = { optional = true, workspace = true }
 # wasm
 wasm-bindgen = { optional = true, workspace = true }
 
@@ -65,16 +71,20 @@ full = [
 
 json = [
     "alloc",
+    "acme-core/json",
     "serde",
     "serde_json",
     "scsys/json",
 ]
 
-nightly = []
+nightly = [    
+    "acme-core/nightly",
+]
 
 # ************* [FF:Environments] *************
 std = [
     "alloc",
+    "acme-core/std",
     "anyhow?/std",
     "rand?/std",
     "rand?/std_rng",
@@ -88,10 +98,12 @@ std = [
 ]
 
 wasi = [
+    "acme-core/wasi",
     "scsys/wasi",
 ]
 
 wasm = [
+    "acme-core/wasm",
     "chrono?/wasmbind",
     "getrandom?/wasm_js",
     "scsys/wasm",
@@ -102,6 +114,7 @@ wasm = [
 
 # ************* [FF:Dependencies] *************
 alloc = [
+    "acme-core/alloc",
     "scsys/alloc",
     "serde?/alloc",
     "serde_json?/alloc",
@@ -112,6 +125,7 @@ anyhow = ["dep:anyhow"]
 
 chrono = [
     "dep:chrono",
+    "acme-core/chrono",
     "std",
     "time",
 ]
@@ -119,12 +133,14 @@ chrono = [
 rand = [
     "dep:rand",
     "dep:rand_distr",
+    "acme-core/rand",
     "rng",
     "time?/rand"
 ]
 
 rng = [
     "dep:getrandom",
+    "acme-core/rng",
     "rand?/small_rng",
     "rand?/thread_rng",
     "uuid?/v4",
@@ -133,6 +149,7 @@ rng = [
 serde = [
     "dep:serde",
     "dep:serde_derive",
+    "acme-core/serde",
     "scsys/serde",
     "time?/serde",
 ]
@@ -141,10 +158,16 @@ serde_json = ["dep:serde_json"]
 
 time = ["dep:time"]
 
-tracing = ["dep:tracing"]
+
+tracing = [
+    "dep:tracing",
+    "acme-core/tracing",
+    "scsys/tracing",
+]
 
 uuid = [
     "dep:uuid",
+    "acme-core/uuid",
     "rng"
 ]
 

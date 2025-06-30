@@ -4,10 +4,11 @@ updates:
   - package-ecosystem: cargo
     schedule:
       interval: monthly
-    directories: 
+    directories:
       - /
       - /acme
       - /core
+      - /engine
   - package-ecosystem: devcontainers
     directory: /
     schedule:
@@ -16,4 +17,3 @@ updates:
     directory: /
     schedule:
       interval: monthly
-

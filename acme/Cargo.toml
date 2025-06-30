@@ -14,11 +14,28 @@ repository.workspace = true
 rust-version.workspace = true
 version.workspace = true
 
+
+[package.metadata.docs.rs]
+all-features = false
+features = ["full"]
+rustc-args = ["--cfg", "docsrs"]
+
 [lib]
+crate-type = [
+    "cdylib", 
+    "rlib",
+]
 bench = true
-crate-type = ["cdylib", "rlib"]
 doctest = true
 test = true
+
+[dependencies]
+acme-core = { workspace = true }
+acme-engine = { workspace = true }
+
+[dev-dependencies]
+criterion = { features = ["plotters"], workspace = true }
+lazy_static = { workspace = true }
 
 [features]
 default = [
@@ -30,38 +47,76 @@ full = [
     "serde",
 ]
 
+# ************* [FF:Features] *************
+
+nightly = [
+    "acme-core/nightly",
+    "acme-engine/nightly",
+]
+
+
+
 # ************* [FF:Dependencies] *************
 alloc = [
     "acme-core/alloc",
+    "acme-engine/alloc",
+]
+
+anyhow = [
+    "acme-core/anyhow",
+    "acme-engine/anyhow",
+]
+
+rand = [
+    "rng",
+    "acme-core/rand",
+    "acme-engine/rand",
+]
+
+rng = [
+    "acme-core/rng",
+    "acme-engine/rng",
 ]
 
 serde = [
     "acme-core/serde",
+    "acme-engine/serde",
+]
+
+time = [
+    "acme-core/time",
+    "acme-engine/time",
+]
+
+tracing = [
+    "acme-core/tracing",
+    "acme-engine/tracing",
 ]
 
 # ********* [FF:Environments] *********
 std = [
     "alloc",
     "acme-core/std",
+    "acme-engine/std",
 ]
 
-[dependencies]
-acme-core = { workspace = true }
+wasi = [
+    "alloc",
+    "acme-core/wasi",
+    "acme-engine/wasi",
+]
 
-[dev-dependencies]
-criterion = { workspace = true }
-lazy_static = { workspace = true }
+wasm = [
+    "alloc",
+    "acme-core/wasm",
+    "acme-engine/wasm",
+]
 
-[package.metadata.docs.rs]
-all-features = false
-features = ["full"]
-rustc-args = ["--cfg", "docsrs"]
-
-# ********* [benchmarks] *********
+# ************* [Benchmarks] *************
 [[bench]]
 harness = false
 name = "default"
 
-# ********* [tests] *********
+# ************* [Unit Tests] *************
 [[test]]
 name = "default"

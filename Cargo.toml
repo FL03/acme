@@ -1,9 +1,14 @@
 [workspace]
-default-members = ["acme"]
+default-members = [
+    "acme"
+]
 
-exclude = []
 
-members = ["acme", "core"]
+members = [
+    "acme", 
+    "core",
+    "engine",
+]
 
 resolver = "3"
 
@@ -28,37 +33,43 @@ version = "0.4.0"
 # sdk
 acme = { default-features = false, path = "acme" }
 acme-core = { default-features = false, path = "core" }
+acme-engine = { default-features = false, path = "engine" }
 # custom
-scsys = { default-features = false, features = ["derive", "macros"], version = "0.2.7" }
-scsys-derive = { default-features = false, version = "0.2.7" }
+scsys = { default-features = false, features = ["derive", "macros"], version = "0.3.1" }
+scsys-derive = { default-features = false, version = "0.3.1" }
 # async
-futures = { default-features = false, version = "0.3" }
-futures-util = { default-features = false, version = "0.3" }
+# futures = { default-features = false, version = "0.3" }
+# futures-util = { default-features = false, version = "0.3" }
 tokio = { default-features = false, version = "1" }
-tokio-util = { default-features = false, version = "0.7" }
+# tokio-util = { default-features = false, version = "0.7" }
 # benchmarking
 criterion = { version = "0.6" }
 # concurrency & parallelism
-crossbeam = { default-features = false, version = "0.8" }
+# crossbeam = { default-features = false, version = "0.8" }
 rayon = { default-features = false, version = "1" }
-# data & serialization
-bincode = { default-features = false, version = "2" }
+rayon-core = { default-features = false, version = "1" }
+# data-structures
 bytes = { default-features = false, version = "1" }
-serde = { default-features = false, features = ["derive"], version = "1" }
-serde_derive = { default-features = false, version = "1" }
-serde_json = { default-features = false, version = "1" }
 # error handling
 anyhow = { default-features = false, version = "1" }
 thiserror = { default-features = false, version = "2" }
-# macros
+# macros & utilities
 lazy_static = { version = "1" }
 paste = { version = "1" }
 smart-default = { version = "0.7" }
 strum = { default-features = false, features = ["derive"], version = "0.27" }
+# serialization
+bincode = { default-features = false, version = "2" }
+serde = { default-features = false, features = ["derive"], version = "1" }
+serde_derive = { default-features = false, version = "1" }
+serde_json = { default-features = false, version = "1" }
 # time
 chrono = { default-features = false, version = "0.4" }
 humantime = { default-features = false, version = "2" }
 time = { default-features = false, version = "0.3" }
+# tracing
+tracing = { default-features = false, features = ["attributes"], version = "0.1" }
+tracing-subscriber = { default-features = false, features = ["fmt", "env-filter"], version = "0.3" }
 # random
 getrandom = { default-features = false, version = "0.3" }
 rand = { default-features = false, version = "0.9" }
