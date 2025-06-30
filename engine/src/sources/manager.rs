@@ -6,7 +6,7 @@ use super::SourceRegistry;
 use crate::pipes::PipeRouter;
 
 /// The [`SourceManager`] is responsible for managing the current data sources
-#[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(
     feature = "serde",
     derive(serde::Serialize, serde::Deserialize),

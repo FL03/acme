@@ -4,19 +4,19 @@
 */
 use crate::sources::SourceManager;
 
-#[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
+#[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(
     feature = "serde",
     derive(serde::Serialize, serde::Deserialize),
     serde(rename_all = "snake_case")
 )]
 #[repr(C)]
-pub struct Scheduler;
+pub struct Scheduler {}
 
 impl Scheduler {
     /// create a new instance of the [`Scheduler`].
     pub const fn new() -> Self {
-        Self
+        Self {}
     }
 
     /// start the scheduler with the provided [`SourceManager`].
