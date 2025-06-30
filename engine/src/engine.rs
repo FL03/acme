@@ -6,6 +6,9 @@ use crate::pipes::PipeRouter;
 use crate::scheduler::Scheduler;
 use crate::sources::SourceManager;
 use std::sync::Arc;
+#[cfg(not(feature = "tokio"))]
+use std::sync::RwLock;
+#[cfg(feature = "tokio")]
 use tokio::sync::RwLock;
 
 /// The [`Engine`] implementation focuses on aggregating information from various sources,
@@ -19,13 +22,17 @@ pub struct Engine {
 }
 
 impl Engine {
-    pub fn new() -> Self {
+    pub fn new() -> crate::Result<Self> {
         let pipe_router = PipeRouter::new();
-        Self {
-            controller: SourceManager::from_router(pipe_router.clone()),
-            scheduler: Scheduler::new(),
-            pipe_router: Arc::new(RwLock::new(pipe_router)),
-        }
+
+        let controller = SourceManager::from_router(pipe_router.clone());
+        let scheduler = Scheduler::new();
+        let pipe_router = Arc::new(RwLock::new(pipe_router));
+        Ok(Self {
+            controller,
+            scheduler,
+            pipe_router,
+        })
     }
     /// returns an immutable reference to the current [`SourceManager`].
     pub const fn controller(&self) -> &SourceManager {
@@ -52,6 +59,7 @@ impl Engine {
         &mut self.scheduler
     }
     /// starts the engine
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all, level = "trace"))]
     pub async fn run(&self) -> crate::Result<()> {
         self.scheduler().start(self.controller().clone()).await;
         Ok(())

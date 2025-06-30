@@ -8,10 +8,10 @@ use alloc::{
     boxed::Box,
     string::{String, ToString},
 };
-#[allow(dead_code)]
+
 /// a type alias for a [`Result`](core::result::Result) configured with the custom [`Error`]
 /// for the crate.
-pub(crate) type CoreResult<T = ()> = core::result::Result<T, Error>;
+pub type Result<T = ()> = core::result::Result<T, Error>;
 
 /// The [`Error`] type enumerates the various errors that can occur within the `acme` engine.
 #[derive(Debug, thiserror::Error)]

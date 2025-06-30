@@ -2,6 +2,7 @@
     appellation: scheduler <module>
     authors: @FL03
 */
+use crate::sources::SourceManager;
 
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(
@@ -19,7 +20,8 @@ impl Scheduler {
     }
 
     /// start the scheduler with the provided [`SourceManager`].
-    pub async fn start(&self, _source_manager: crate::sources::SourceManager) {
+    #[cfg_attr(feature = "tracing", tracing::instrument(skip_all, level = "trace"))]
+    pub async fn start(&self, _ctx: SourceManager) {
         // Implementation for starting the scheduler goes here.
         // This is a placeholder for now.
         todo!("Scheduler start logic not implemented yet");

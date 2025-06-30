@@ -14,11 +14,15 @@ repository.workspace = true
 rust-version.workspace = true
 version.workspace = true
 
-
 [package.metadata.docs.rs]
 all-features = false
 features = ["full"]
-rustc-args = ["--cfg", "docsrs"]
+rustc-args = [ "--cfg", "docsrs" ]
+version = "v{{version}}"
+
+[package.metadata.release]
+no-dev-version = true
+tag-name = "v{{version}}"
 
 [lib]
 crate-type = [
@@ -26,96 +30,139 @@ crate-type = [
     "rlib",
 ]
 bench = true
+doc = true
 doctest = true
 test = true
 
 [dependencies]
 acme-core = { workspace = true }
-acme-engine = { workspace = true }
+acme-engine = { optional = true, workspace = true }
 
 [dev-dependencies]
+anyhow = { features = ["std"], workspace = true }
 criterion = { features = ["plotters"], workspace = true }
 lazy_static = { workspace = true }
+tokio = { features = ["rt-multi-thread", "macros"], workspace = true }
+tracing = { features = ["log"], workspace = true }
+tracing-subscriber = { features = ["ansi"], workspace = true }
 
 [features]
 default = [
+    "engine",
     "std",
 ]
 
 full = [
     "default",
+    "chrono",
+    "json",
     "serde",
+    "time",
+    "tokio",
+    "tracing",
+    "uuid",
 ]
 
 # ************* [FF:Features] *************
 
-nightly = [
-    "acme-core/nightly",
-    "acme-engine/nightly",
+engine = [
+    "dep:acme-engine",
+    "std",
 ]
 
-
-
-# ************* [FF:Dependencies] *************
-alloc = [
-    "acme-core/alloc",
-    "acme-engine/alloc",
-]
-
-anyhow = [
-    "acme-core/anyhow",
-    "acme-engine/anyhow",
-]
-
-rand = [
-    "rng",
-    "acme-core/rand",
-    "acme-engine/rand",
-]
-
-rng = [
-    "acme-core/rng",
-    "acme-engine/rng",
-]
-
-serde = [
-    "acme-core/serde",
-    "acme-engine/serde",
-]
-
-time = [
-    "acme-core/time",
-    "acme-engine/time",
-]
-
-tracing = [
-    "acme-core/tracing",
-    "acme-engine/tracing",
+json = [
+    "acme-core/json",
+    "acme-engine?/json",
 ]
 
 # ********* [FF:Environments] *********
+nightly = [
+    "acme-core/nightly",
+    "acme-engine?/nightly",
+]
+
 std = [
     "alloc",
     "acme-core/std",
-    "acme-engine/std",
+    "acme-engine?/std",
 ]
 
 wasi = [
     "alloc",
     "acme-core/wasi",
-    "acme-engine/wasi",
+    "acme-engine?/wasi",
 ]
 
 wasm = [
     "alloc",
     "acme-core/wasm",
-    "acme-engine/wasm",
+    "acme-engine?/wasm",
+]
+
+# ************* [FF:Dependencies] *************
+alloc = [
+    "acme-core/alloc",
+    "acme-engine?/alloc",
+]
+
+anyhow = [
+    "acme-core/anyhow",
+    "acme-engine?/anyhow",
+]
+
+chrono = [
+    "acme-core/chrono",
+    "acme-engine?/chrono",
+]
+
+rand = [
+    "rng",
+    "acme-core/rand",
+    "acme-engine?/rand",
+]
+
+rng = [
+    "acme-core/rng",
+    "acme-engine?/rng",
+]
+
+serde = [
+    "acme-core/serde",
+    "acme-engine?/serde",
+]
+
+time = [
+    "acme-core/time",
+    "acme-engine?/time",
+]
+
+tokio = [
+    "acme-engine?/tokio",
+]
+
+tracing = [
+    "acme-core/tracing",
+    "acme-engine?/tracing",
+]
+
+uuid = [
+    "acme-core/uuid",
+    "acme-engine?/uuid",
 ]
 
 # ************* [Benchmarks] *************
 [[bench]]
 harness = false
 name = "default"
+
+# ************* [Examples] *************
+[[example]]
+name = "basic"
+required-features = [
+    "engine",
+    "std",
+    "tracing",
+]
 
 # ************* [Unit Tests] *************
 [[test]]

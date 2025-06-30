@@ -15,6 +15,11 @@
 )]
 #![cfg_attr(not(feature = "std"), no_std)]
 
+#[cfg(not(all(feature = "std", feature = "alloc")))]
+compile_error! {
+    "The `acme-engine` crate requires either the `std` or `alloc` feature to be enabled."
+}
+
 #[cfg(feature = "std")]
 extern crate std;
 
@@ -23,7 +28,11 @@ extern crate alloc;
 
 #[doc(inline)]
 pub use acme_core::*;
+#[cfg(feature = "engine")]
+pub use acme_engine as engine;
 
 pub mod prelude {
     pub use acme_core::prelude::*;
+    #[cfg(feature = "engine")]
+    pub use acme_engine::prelude::*;
 }

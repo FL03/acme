@@ -1,6 +1,6 @@
 [package]
 build = "build.rs"
-description = "the automatic content/context management engine implementation"
+description = "the engine of the acme platform enabling automation and orchestration of tasks across various sources and sinks"
 name = "acme-engine"
 
 authors.workspace = true
@@ -17,8 +17,22 @@ version.workspace = true
 [package.metadata.docs.rs]
 all-features = false
 features = ["full"]
-rustc-args = ["--cfg", "docsrs"]
-version = "{{version}}"
+rustc-args = [ "--cfg", "docsrs" ]
+version = "v{{version}}"
+
+[package.metadata.release]
+no-dev-version = true
+tag-name = "v{{version}}"
+
+[lib]
+crate-type = [
+    "cdylib",
+    "rlib",
+]
+bench = false
+doc = true
+doctest = true
+test = true
 
 [dependencies]
 # local
@@ -28,7 +42,9 @@ scsys = { workspace = true }
 
 # async
 tokio = { features = ["sync"], optional = true, workspace = true }
-# data & serialization
+# data-structures
+bytes = { optional = true, workspace = true }
+# serialization
 serde = { features = ["derive"], optional = true, workspace = true }
 serde_derive = { optional = true, workspace = true }
 serde_json = { optional = true, workspace = true }
@@ -43,7 +59,6 @@ strum = { features = ["derive"], workspace = true }
 getrandom = { optional = true, workspace = true }
 rand = { optional = true, workspace = true }
 rand_distr = { optional = true, workspace = true }
-uuid = { optional = true, workspace = true }
 # time
 chrono = { optional = true, workspace = true }
 time = { optional = true, workspace = true }
@@ -57,14 +72,17 @@ lazy_static = { workspace = true }
 
 [features]
 default = [
-    "std"
+    "std",
+    "tokio",
 ]
 
 full = [
     "default",
     "anyhow",
+    "bytes",
     "json",
-    "serde"
+    "serde",
+    "tracing",
 ]
 
 # ************* [FF:Features] *************
@@ -94,7 +112,6 @@ std = [
     "strum/std",
     "thiserror/std",
     "time?/std",
-    "uuid?/std"
 ]
 
 wasi = [
@@ -108,7 +125,6 @@ wasm = [
     "getrandom?/wasm_js",
     "scsys/wasm",
     "time?/wasm-bindgen",
-    "uuid?/js",
     "wasm-bindgen",
 ]
 
@@ -122,6 +138,11 @@ alloc = [
 ]
 
 anyhow = ["dep:anyhow"]
+
+bytes = [
+    "dep:bytes",
+    "tokio?/bytes",
+]
 
 chrono = [
     "dep:chrono",
@@ -143,7 +164,6 @@ rng = [
     "acme-core/rng",
     "rand?/small_rng",
     "rand?/thread_rng",
-    "uuid?/v4",
 ]
 
 serde = [
@@ -158,15 +178,16 @@ serde_json = ["dep:serde_json"]
 
 time = ["dep:time"]
 
+tokio = ["dep:tokio"]
 
 tracing = [
     "dep:tracing",
     "acme-core/tracing",
     "scsys/tracing",
+    "tokio?/tracing",
 ]
 
 uuid = [
-    "dep:uuid",
     "acme-core/uuid",
     "rng"
 ]
