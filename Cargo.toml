@@ -30,9 +30,9 @@ version = "0.4.1"
 
 [workspace.dependencies]
 # sdk
-acme = { default-features = false, path = "acme" }
-acme-core = { default-features = false, path = "core" }
-acme-engine = { default-features = false, path = "engine" }
+acme = { default-features = false, path = "acme", version = "0.4.1" }
+acme-core = { default-features = false, path = "core", version = "0.4.1" }
+acme-engine = { default-features = false, path = "engine", version = "0.4.1" }
 # custom
 scsys = { default-features = false, features = ["derive", "macros"], version = "0.3.1" }
 scsys-derive = { default-features = false, version = "0.3.1" }
