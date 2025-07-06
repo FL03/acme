@@ -15,11 +15,6 @@
 )]
 #![cfg_attr(not(feature = "std"), no_std)]
 
-#[cfg(not(all(feature = "std", feature = "alloc")))]
-compile_error! {
-    "The `acme-engine` crate requires either the `std` or `alloc` feature to be enabled."
-}
-
 #[cfg(feature = "std")]
 extern crate std;
 
