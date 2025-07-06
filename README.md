@@ -10,6 +10,8 @@ _**Warning: the project is currently in the early stages of development and not 
 
 Welcome to `acme`! This crate focuses on aggregating information from various sources and processing it in a secure, robust, and efficient manner. The project is designed to be modular and extensible, allowing for easy integration of new data sources and sinks.
 
+This crate is one of the first extensions of the `eryon` framework, a Rust-based computational systems designed for high-performance data processing using topology with a hint of music-theory. The `acme` crate aims to provide a flexible and powerful platform for building data processing pipelines, leveraging the capabilities of the `eryon` framework.
+
 ## Features
 
 - [`engine`](https://docs.rs/acme-engine/latest/acme_engine/): The core engine that orchestrates the data processing pipeline.

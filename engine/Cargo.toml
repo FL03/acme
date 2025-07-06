@@ -42,8 +42,13 @@ scsys = { workspace = true }
 
 # async
 tokio = { features = ["sync"], optional = true, workspace = true }
+# concurrency & parallelism
+crossbeam = { optional = true, workspace = true }
+rayon = { optional = true, workspace = true }
+rayon-core = { optional = true, workspace = true }
 # data-structures
 bytes = { optional = true, workspace = true }
+dashmap = { optional = true, workspace = true }
 # serialization
 serde = { features = ["derive"], optional = true, workspace = true }
 serde_derive = { optional = true, workspace = true }
@@ -73,15 +78,16 @@ lazy_static = { workspace = true }
 [features]
 default = [
     "std",
-    "tokio",
 ]
 
 full = [
     "default",
     "anyhow",
     "bytes",
+    "dashmap",
     "json",
     "serde",
+    "tokio",
     "tracing",
 ]
 
@@ -151,12 +157,21 @@ chrono = [
     "time",
 ]
 
+crossbeam = ["dep:crossbeam"]
+
+dashmap = ["dep:dashmap"]
+
 rand = [
     "dep:rand",
     "dep:rand_distr",
     "acme-core/rand",
     "rng",
     "time?/rand"
+]
+
+rayon = [
+    "dep:rayon",
+    "dep:rayon-core",
 ]
 
 rng = [

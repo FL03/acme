@@ -42,7 +42,7 @@ tokio = { default-features = false, version = "1" }
 # benchmarking
 criterion = { version = "0.6" }
 # concurrency & parallelism
-# crossbeam = { default-features = false, version = "0.8" }
+crossbeam = { default-features = false, version = "0.8" }
 rayon = { default-features = false, version = "1" }
 rayon-core = { default-features = false, version = "1" }
 # data-structures
