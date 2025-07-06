@@ -1,0 +1,155 @@
+[package]
+build = "build.rs"
+description = "the core modules for the acme platform"
+name = "acme-core"
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[package.metadata.docs.rs]
+all-features = false
+features = ["full"]
+rustc-args = ["--cfg", "docsrs"]
+version = "{{version}}"
+
+[dependencies]
+scsys = { workspace = true }
+# data & serialization
+serde = { features = ["derive"], optional = true, workspace = true }
+serde_derive = { optional = true, workspace = true }
+serde_json = { optional = true, workspace = true }
+# error handling
+anyhow = { optional = true, workspace = true }
+thiserror = { workspace = true }
+# macros
+paste = { workspace = true }
+smart-default = { workspace = true }
+strum = { features = ["derive"], workspace = true }
+# time
+chrono = { optional = true, workspace = true }
+time = { optional = true, workspace = true }
+# tracing
+tracing = { optional = true, workspace = true }
+# random
+getrandom = { optional = true, workspace = true }
+rand = { optional = true, workspace = true }
+rand_distr = { optional = true, workspace = true }
+uuid = { optional = true, workspace = true }
+# wasm
+wasm-bindgen = { optional = true, workspace = true }
+
+[dev-dependencies]
+lazy_static = { workspace = true }
+
+[features]
+default = [
+    "std"
+]
+
+full = [
+    "default",
+    "anyhow",
+    "json",
+    "serde"
+]
+
+# ************* [FF:Features] *************
+
+json = [
+    "alloc",
+    "serde",
+    "serde_json",
+    "scsys/json",
+]
+
+nightly = []
+
+# ************* [FF:Environments] *************
+std = [
+    "alloc",
+    "anyhow?/std",
+    "rand?/std",
+    "rand?/std_rng",
+    "scsys/std",
+    "serde?/std",
+    "serde_json?/std",
+    "strum/std",
+    "thiserror/std",
+    "time?/std",
+    "uuid?/std"
+]
+
+wasi = [
+    "scsys/wasi",
+]
+
+wasm = [
+    "chrono?/wasmbind",
+    "getrandom?/wasm_js",
+    "scsys/wasm",
+    "time?/wasm-bindgen",
+    "uuid?/js",
+    "wasm-bindgen",
+]
+
+# ************* [FF:Dependencies] *************
+alloc = [
+    "scsys/alloc",
+    "serde?/alloc",
+    "serde_json?/alloc",
+    "time?/alloc",
+]
+
+anyhow = ["dep:anyhow"]
+
+chrono = [
+    "dep:chrono",
+    "std",
+    "time",
+]
+
+rand = [
+    "dep:rand",
+    "dep:rand_distr",
+    "rng",
+    "time?/rand"
+]
+
+rng = [
+    "dep:getrandom",
+    "rand?/small_rng",
+    "rand?/thread_rng",
+    "uuid?/v4",
+]
+
+serde = [
+    "dep:serde",
+    "dep:serde_derive",
+    "scsys/serde",
+    "time?/serde",
+]
+
+serde_json = ["dep:serde_json"]
+
+time = ["dep:time"]
+
+tracing = ["dep:tracing"]
+
+uuid = [
+    "dep:uuid",
+    "rng"
+]
+
+wasm-bindgen = ["dep:wasm-bindgen"]
+
+# ************* [Unit Tests] *************
+[[test]]
+name = "default"
