@@ -27,6 +27,8 @@ pub use self::{
 pub(crate) mod macros {
     #[macro_use]
     pub(crate) mod seal;
+    #[macro_use]
+    pub(crate) mod wrap;
 }
 
 pub mod comp;

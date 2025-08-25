@@ -7,6 +7,7 @@
 pub use self::component::*;
 
 pub mod component;
+pub mod interface;
 
 pub(crate) mod prelude {
     #[doc(inline)]
