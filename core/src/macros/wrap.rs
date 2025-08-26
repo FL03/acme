@@ -3,11 +3,11 @@
     authors: @FL03
 */
 
-/// A macro for implementing formatting traits onto so-called wrapper types; i.e. any struct 
+/// A macro for implementing formatting traits onto so-called wrapper types; i.e. any struct
 /// capable of implementing the `#[repr(transparent)]` attribute.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```ignore
 /// fmt_wrapper! {
 ///     MyWrapper<T>::inner {
@@ -21,18 +21,18 @@
 ///     }
 /// }
 /// ```
-/// 
+///
 /// or, for tuple structs:
-/// 
+///
 /// ```ignore
 /// fmt_wrapper! {
 ///     MyWrapper<T>(Debug, Display, Binary, LowerExp, UpperExp, LowerHex, UpperHex)
 /// }
-/// 
+///
 macro_rules! fmt_wrapper {
     ($target:ident<$T:ident>::$field:ident { $($trait:ident),* $(,)?}) => {
         $(
-            impl<$T> ::core::fmt::$trait for $target<$T> 
+            impl<$T> ::core::fmt::$trait for $target<$T>
             where
                 $T: ::core::fmt::$trait,
             {
@@ -44,7 +44,7 @@ macro_rules! fmt_wrapper {
     };
     ($target:ident<$T:ident>($($trait:ident),* $(,)?)) => {
         $(
-            impl<$T> ::core::fmt::$trait for $target<$T> 
+            impl<$T> ::core::fmt::$trait for $target<$T>
             where
                 $T: ::core::fmt::$trait,
             {
@@ -104,8 +104,8 @@ macro_rules! wrapper {
     };
     (@impl $target:ident<$T:ident>) => {
         impl<$T> $target<$T> {
-            /// apply the closure `f` onto the inner value and capture the result 
-            pub fn map<F, U>(&self, f: F) -> $target<U> 
+            /// apply the closure `f` onto the inner value and capture the result
+            pub fn map<F, U>(&self, f: F) -> $target<U>
             where
                 F: FnOnce(&$T) -> U,
             {
@@ -126,7 +126,7 @@ macro_rules! wrapper {
             }
             /// [`take`](core::mem::take) the inner value, leaving a default in its place
             #[inline]
-            pub fn take(&mut self) -> $T 
+            pub fn take(&mut self) -> $T
             where
                 $T: ::core::default::Default,
             {
