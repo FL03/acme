@@ -21,6 +21,7 @@ rustc-args = ["--cfg", "docsrs"]
 version = "{{version}}"
 
 [dependencies]
+contained = { workspace = true }
 scsys = { workspace = true }
 # data & serialization
 serde = { features = ["derive"], optional = true, workspace = true }
@@ -70,12 +71,15 @@ json = [
     "scsys/json",
 ]
 
-nightly = []
+nightly = [
+    "contained/nightly",
+]
 
 # ************* [FF:Environments] *************
 std = [
     "alloc",
     "anyhow?/std",
+    "contained/std",
     "rand?/std",
     "rand?/std_rng",
     "scsys/std",
@@ -102,6 +106,7 @@ wasm = [
 
 # ************* [FF:Dependencies] *************
 alloc = [
+    "contained/alloc",
     "scsys/alloc",
     "serde?/alloc",
     "serde_json?/alloc",

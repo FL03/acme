@@ -18,8 +18,8 @@ pub struct Interface<T> {
     pub(crate) inner: T,
 }
 
-fmt_wrapper! {
-    Interface<T>::inner {
+contained::fmt_wrapper! {
+    Interface<T>.inner::(
         Debug,
         Display,
         Binary,
@@ -28,6 +28,6 @@ fmt_wrapper! {
         LowerHex,
         UpperHex,
         Octal,
-        Pointer,
-    }
+        Pointer,    
+    )
 }

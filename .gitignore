@@ -3,7 +3,6 @@
 **/.artifacts/data/
 **/.docker/data/
 
-
 ## Caches
 
 **/.cache/
@@ -36,7 +35,9 @@
 
 ### vscode
 
-**/.vscode/
+**/.vscode/*
+
+!**/.vscode/settings.json
 
 # File Extensions
 
@@ -68,7 +69,7 @@
 **/*.bk
 **/*.bk.*
 
-!Cargo.lock
+!**/Cargo.lock
 
 ## Node
 **/build/
