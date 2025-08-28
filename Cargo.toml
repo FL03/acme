@@ -34,14 +34,13 @@ acme = { default-features = false, path = "acme", version = "0.4.1" }
 acme-core = { default-features = false, path = "core", version = "0.4.1" }
 acme-engine = { default-features = false, path = "engine", version = "0.4.1" }
 # custom
-contained = { default-features = false, features = ["derive"], version = "0.2.0" }
+contained = { default-features = false, features = ["derive", "macros"], version = "0.2.0" }
+variants = { default-features = false, features = ["derive", "macros", "alloc"], version = "0.0.1" }
 scsys = { default-features = false, features = ["derive", "macros"], version = "0.3.1" }
 scsys-derive = { default-features = false, version = "0.3.1" }
 # async
 # futures = { default-features = false, version = "0.3" }
 tokio = { default-features = false, version = "1" }
-# benchmarking
-criterion = { version = "0.6" }
 # concurrency & parallelism
 crossbeam = { default-features = false, version = "0.8" }
 rayon = { default-features = false, version = "1" }
