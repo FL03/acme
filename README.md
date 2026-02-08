@@ -6,66 +6,32 @@
 
 ***
 
-_**Warning: the project is currently in the early stages of development and not yet suitable for production use-cases**_
+***Warning: the project is currently in the early stages of development and not yet suitable for production use-cases***
 
-Welcome to `acme`! This crate focuses on aggregating information from various sources and processing it in a secure, robust, and efficient manner. The project is designed to be modular and extensible, allowing for easy integration of new data sources and sinks.
-
-This crate is one of the first extensions of the `eryon` framework, a Rust-based computational systems designed for high-performance data processing using topology with a hint of music-theory. The `acme` crate aims to provide a flexible and powerful platform for building data processing pipelines, leveraging the capabilities of the `eryon` framework.
+Welcome to `acme`! The `acme` protocol seeks to establish an automated context management engine used to guide and inform dynamic processes at scale. This is particularly useful for agentic systems, where individual agents often lack the ability to naturally inherit context and working knowledge from other agents, leading to inefficiencies and a lack of coordination. By providing a structured way to manage and share context, `acme` aims to enhance the capabilities of agentic systems, enabling them to operate more effectively and collaboratively.
 
 ## Features
 
 - [`engine`](https://docs.rs/acme-engine/latest/acme_engine/): The core engine that orchestrates the data processing pipeline.
 - [`core`](https://docs.rs/acme-core/latest/acme_core/): Provides the foundational components and utilities for the ACME platform.
 
-### _Dependency-related Features_
+### *Environmental Features*
 
-In addition to the core features of the crate and the various _environmental_ features, the crate integrates with several external crates for enhanced functionality:
+- `alloc`: Provides support for heap allocation, enabling the use of dynamic data structures.
+- `std`: The Rust standard library, providing essential types and functionalities for Rust programming.
+- `nightly`: Enables features that require the Rust nightly compiler, allowing for the use of unstable features and optimizations.
+- `wasi`: Enables support for WebAssembly System Interface (WASI), allowing the crate to run in WebAssembly environments.
+- `wasm`: Enables support for WebAssembly, allowing the crate to be compiled to and run in WebAssembly environments.
+
+### *Dependency-related Features*
+
+In addition to the core features of the crate and the various *environmental* features, the crate integrates with several external crates for enhanced functionality:
 
 - `serde`: Enables serialization and deserialization of data.
 - `tracing`: Provides a framework for instrumenting Rust programs to collect structured, contextual, and async-aware diagnostics.
-- `tokio`: An asynchronous runtime for the Rust programming language, enabling concurrent programming.
+- `wasm_bindgen`: Enables `wasm-bindgen`, thus allowing interoperability between Rust and JavaScript. Allows the crate to be used in web applications.
 
 ## Getting Started
-
-Before you start using `acme`, ensure you have the following prerequisites:
-
-- [Git](https://git-scm.com/) for cloning the repository
-- Rust installed on your machine. You can install it from [rustup.rs](https://rustup.rs/).
-  - A compatible version of the Rust toolchain (preferably the latest stable version).
-  - [Cargo](https://doc.rust-lang.org/cargo/) for building and managing Rust projects.
-  - **Optionally**, install the [cargo-binstall](https://github.com/cargo-bins/cargo-binstall) utility for streamlined installation of Rust binaries.
-
-For more information on how to setup your environment, refer to the [QUICKSTART](https://github.com/acme/blob/main/QUICKSTART.md) guide.
-
-### From the source
-
-Start by cloning the repository:
-
-```bash
-git clone https://github.com/FL03/acme.git
-```
-
-Then, navigate to the project directory:
-
-```bash
-cd acme
-```
-
-#### Using cargo
-
-To build the project, you can use the following command:
-
-```bash
-cargo build -r --locked --workspace --features full
-```
-
-To run the tests, you can use the following command:
-
-```bash
-cargo test -r --locked --workspace --features full
-```
-
-## Usage
 
 Add this to your `Cargo.toml`:
 
@@ -75,7 +41,7 @@ features = []
 version = "0.4.x"
 ```
 
-### _Basic Usage_
+### Basic Usage
 
 ```rust
     use acme::engine::Engine;
@@ -99,7 +65,7 @@ version = "0.4.x"
 
 ## Contributing
 
-[CONTRIBUTORS](https://github.com/acme/blob/main/CONTRIBUTORS.md)
+To get started with developing with `acme`, visit the [QUICKSTART](QUICKSTART.md) guide for a step-by-step introduction to using the crate in your projects and make sure to reference the [CONTRIBUTING](CONTRIBUTING.md) guidelines for information on how to contribute to the project.
 
 ## License
 
