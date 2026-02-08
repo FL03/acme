@@ -16,8 +16,8 @@ version.workspace = true
 
 [package.metadata.docs.rs]
 all-features = false
-features = ["full"]
-rustc-args = [ "--cfg", "docsrs" ]
+features = ["default"]
+rustc-args = ["--cfg", "docsrs"]
 version = "v{{version}}"
 
 [package.metadata.release]
@@ -25,27 +25,16 @@ no-dev-version = true
 tag-name = "v{{version}}"
 
 [lib]
-crate-type = [
-    "cdylib",
-    "rlib",
-]
 bench = false
-doc = true
-doctest = true
-test = true
 
 [dependencies]
 # local
 acme-core = { workspace = true }
-# custom
-scsys = { workspace = true }
-
 # async
 tokio = { features = ["sync"], optional = true, workspace = true }
 # concurrency & parallelism
 crossbeam = { optional = true, workspace = true }
 rayon = { optional = true, workspace = true }
-rayon-core = { optional = true, workspace = true }
 # data-structures
 bytes = { optional = true, workspace = true }
 dashmap = { optional = true, workspace = true }
@@ -77,84 +66,89 @@ lazy_static = { workspace = true }
 
 [features]
 default = [
-    "std",
+  "std",
 ]
 
 full = [
-    "default",
-    "anyhow",
-    "bytes",
-    "dashmap",
-    "json",
-    "serde",
-    "tokio",
-    "tracing",
+  "default",
+  "anyhow",
+  "bytes",
+  "json",
+  "serde",
+  "time",
+  "tokio",
+  "tracing",
 ]
 
 # ************* [FF:Features] *************
 
 json = [
-    "alloc",
-    "acme-core/json",
-    "serde",
-    "serde_json",
-    "scsys/json",
+  "alloc",
+  "serde",
+  "serde_json",
+  "acme-core/json",
 ]
 
-nightly = [    
-    "acme-core/nightly",
+nightly = [
+  "acme-core/nightly",
+]
+
+time = [
+  "alloc",
+  "chrono",
+  "time_1",
 ]
 
 # ************* [FF:Environments] *************
 std = [
-    "alloc",
-    "acme-core/std",
-    "anyhow?/std",
-    "rand?/std",
-    "rand?/std_rng",
-    "scsys/std",
-    "serde?/std",
-    "serde_json?/std",
-    "strum/std",
-    "thiserror/std",
-    "time?/std",
+  "alloc",
+  "acme-core/std",
+  "anyhow/std",
+  "getrandom?/std",
+  "rand?/std",
+  "rand?/std_rng",
+  "rand_distr?/std",
+  "serde?/std",
+  "serde_json?/std",
+  "strum/std",
+  "thiserror/std",
+  "time?/std",
+  "wasm-bindgen?/std",
 ]
 
 wasi = [
-    "acme-core/wasi",
-    "scsys/wasi",
+  "acme-core/wasi",
 ]
 
 wasm = [
-    "acme-core/wasm",
-    "chrono?/wasmbind",
-    "getrandom?/wasm_js",
-    "scsys/wasm",
-    "time?/wasm-bindgen",
-    "wasm-bindgen",
+  "wasm_bindgen",
+  "acme-core/wasm",
+  "chrono?/wasmbind",
+  "getrandom?/wasm_js",
+  "time?/wasm-bindgen",
 ]
 
 # ************* [FF:Dependencies] *************
 alloc = [
-    "acme-core/alloc",
-    "scsys/alloc",
-    "serde?/alloc",
-    "serde_json?/alloc",
-    "time?/alloc",
+  "acme-core/alloc",
+  "rand?/alloc",
+  "rand_distr?/alloc",
+  "serde?/alloc",
+  "serde_json?/alloc",
+  "time?/alloc",
+  "wasm-bindgen?/gg-alloc",
 ]
 
-anyhow = ["dep:anyhow"]
 
 bytes = [
-    "dep:bytes",
-    "tokio?/bytes",
+  "dep:bytes",
+  "tokio?/bytes",
 ]
 
 chrono = [
-    "dep:chrono",
-    "acme-core/chrono",
-    "std",
-    "time",
+  "dep:chrono",
+  "acme-core/chrono",
+  "std",
 ]
 
 crossbeam = ["dep:crossbeam"]
@@ -162,53 +156,55 @@ crossbeam = ["dep:crossbeam"]
 dashmap = ["dep:dashmap"]
 
 rand = [
-    "dep:rand",
-    "dep:rand_distr",
-    "acme-core/rand",
-    "rng",
-    "time?/rand"
+  "dep:rand",
+  "dep:rand_distr",
+  "rng",
+  "acme-core/rand",
+  "time?/rand",
 ]
 
-rayon = [
-    "dep:rayon",
-    "dep:rayon-core",
-]
+rayon = ["dep:rayon"]
 
 rng = [
-    "dep:getrandom",
-    "acme-core/rng",
-    "rand?/small_rng",
-    "rand?/thread_rng",
+  "dep:getrandom",
+  "acme-core/rng",
+  "rand?/os_rng",
+  "rand?/small_rng",
 ]
 
 serde = [
-    "dep:serde",
-    "dep:serde_derive",
-    "acme-core/serde",
-    "scsys/serde",
-    "time?/serde",
+  "dep:serde",
+  "dep:serde_derive",
+  "acme-core/serde",
+  "rand?/serde",
+  "rand_distr?/serde",
+  "time?/serde",
 ]
 
-serde_json = ["dep:serde_json"]
+serde_json = [
+  "dep:serde_json",
+  "acme-core/serde_json",
+]
 
-time = ["dep:time"]
+time_1 = [
+  "dep:time",
+  "acme-core/time_1",
+]
 
 tokio = ["dep:tokio"]
 
 tracing = [
-    "dep:tracing",
-    "acme-core/tracing",
-    "scsys/tracing",
-    "tokio?/tracing",
+  "dep:tracing",
+  "acme-core/tracing",
+  "tokio?/tracing",
 ]
 
 uuid = [
-    "acme-core/uuid",
-    "rng"
+  "acme-core/uuid",
+  "rng",
 ]
 
-wasm-bindgen = ["dep:wasm-bindgen"]
-
-# ************* [Unit Tests] *************
-[[test]]
-name = "default"
+wasm_bindgen = [
+  "dep:wasm-bindgen",
+  "acme-core/wasm_bindgen",
+]

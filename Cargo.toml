@@ -1,22 +1,16 @@
 [workspace]
 default-members = [
-    "acme"
+  "crates/acme",
 ]
 
-
 members = [
-    "acme", 
-    "core",
-    "engine",
+  "crates/*",
 ]
 
 resolver = "3"
 
 [workspace.package]
-authors = [
-    "FL03 <j3mccain@gmail.com> (https://github.com/FL03)",
-    "Scattered-Systems <support@scsys.io> (https://github.com/scattered-systems)"
-]
+authors = ["FL03 <joe@pzzld.org> (https://github.com/FL03)"]
 categories = []
 description = "acme is an automated context management engine designed for the scsys ecosystem."
 edition = "2024"
@@ -25,28 +19,35 @@ keywords = ["engine", "automations", "context", "management"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/FL03/acme.git"
-rust-version = "1.85.0"
+rust-version = "1.88.0"
 version = "0.4.1"
 
 [workspace.dependencies]
 # sdk
-acme = { default-features = false, path = "acme", version = "0.4.1" }
-acme-core = { default-features = false, path = "core", version = "0.4.1" }
-acme-engine = { default-features = false, path = "engine", version = "0.4.1" }
+acme = { default-features = false, path = "crates/acme", version = "0.4.1" }
+acme-core = { default-features = false, path = "crates/core", version = "0.4.1" }
+acme-engine = { default-features = false, path = "crates/engine", version = "0.4.1" }
+acme-traits = { default-features = false, path = "crates/traits", version = "0.4.1" }
 # custom
-contained = { default-features = false, features = ["derive", "macros"], version = "0.2.0" }
-variants = { default-features = false, features = ["derive", "macros", "alloc"], version = "0.0.1" }
-scsys = { default-features = false, features = ["derive", "macros"], version = "0.3.1" }
-scsys-derive = { default-features = false, version = "0.3.1" }
+contained = { default-features = false, features = [
+  "derive",
+  "macros",
+], version = "0.2.0" }
+variants = { default-features = false, features = [
+  "derive",
+  "macros",
+], version = "0.0.1" }
+
+# development
+criterion = { version = "0.8" }
 # async
-# futures = { default-features = false, version = "0.3" }
 tokio = { default-features = false, version = "1" }
 # concurrency & parallelism
 crossbeam = { default-features = false, version = "0.8" }
 rayon = { default-features = false, version = "1" }
-rayon-core = { default-features = false, version = "1" }
 # data-structures
 bytes = { default-features = false, version = "1" }
+hashbrown = { default-features = false, version = "0.16" }
 dashmap = { default-features = false, version = "6" }
 # error handling
 anyhow = { default-features = false, version = "1" }
@@ -57,7 +58,7 @@ paste = { version = "1" }
 smart-default = { version = "0.7" }
 strum = { default-features = false, features = ["derive"], version = "0.27" }
 # serialization
-bincode = { default-features = false, version = "2" }
+bincode = { default-features = false, version = "3" }
 serde = { default-features = false, features = ["derive"], version = "1" }
 serde_derive = { default-features = false, version = "1" }
 serde_json = { default-features = false, version = "1" }
@@ -67,7 +68,7 @@ humantime = { default-features = false, version = "2" }
 time = { default-features = false, version = "0.3" }
 # tracing
 tracing = { default-features = false, features = ["attributes"], version = "0.1" }
-tracing-subscriber = { default-features = false, features = ["fmt", "env-filter"], version = "0.3" }
+tracing-subscriber = { features = ["fmt", "env-filter"], version = "0.3" }
 # random
 getrandom = { default-features = false, version = "0.3" }
 rand = { default-features = false, version = "0.9" }
@@ -77,10 +78,8 @@ uuid = { default-features = false, version = "1.17" }
 num = { default-features = false, version = "0.4" }
 num-complex = { default-features = false, version = "0.4" }
 num-traits = { default-features = false, version = "0.2" }
-# wasm (emscripten)
-js-sys = { default-features = false, version = "0.3" }
+# wasm
 wasm-bindgen = { default-features = false, version = "0.2" }
-
 
 [profile.dev]
 codegen-units = 256
@@ -90,9 +89,9 @@ incremental = true
 lto = "thin"
 opt-level = 3
 overflow-checks = true
-panic = "unwind"
+panic = "abort"
 rpath = false
-strip = "symbols"
+strip = "none"
 
 [profile.release]
 codegen-units = 16

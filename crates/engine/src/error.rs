@@ -24,7 +24,7 @@ impl From<EngineError> for acme_core::error::Error {
     fn from(err: EngineError) -> Self {
         match err {
             EngineError::CoreError(e) => e,
-            _ => acme_core::error::Error::box_error(err),
+            _ => acme_core::error::Error::boxed(err),
         }
     }
 }

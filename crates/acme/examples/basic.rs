@@ -13,6 +13,7 @@ async fn main() -> acme::Result<()> {
         .with_max_level(tracing::Level::TRACE)
         .with_thread_ids(false)
         .with_target(true)
+        .with_timer(tracing_subscriber::fmt::time::d)
         .compact()
         .init();
     // verify the tracing layers are initialized

@@ -1,10 +1,10 @@
 /*
     Appellation: default <test>
-    Contrib: FL03 <jo3mccain@icloud.com>
+    Contrib: @FL03
 */
 
 #[test]
-fn lib_compiles() {
+fn compiles() {
     fn add<A, B, C>(a: A, b: B) -> C
     where
         A: core::ops::Add<B, Output = C>,
@@ -12,6 +12,6 @@ fn lib_compiles() {
         a + b
     }
 
-    assert_eq!(add(10, 10), 20);
-    assert_ne!(add(1, 1), 3);
+    assert_eq! { add(1, 100), 101 }
+    assert_eq! { add(1.0, 100.0), 101.0 }
 }

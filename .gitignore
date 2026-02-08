@@ -1,113 +1,137 @@
-# Artifacts
+# General
+*.bk
+*.bk.*
 
-**/.artifacts/data/
-**/.docker/data/
+*.db
+*.db.*
 
-## Caches
+*.log
+*.log.*
+
+*.pem
+*.pem.*
+
+*.gz
+*.gz.*
+
+*.sqlite
+*.sqlite.*
+
+*.sqlite3
+*.sqlite3.*
+
+*.zip
+*.zip.*
+
+## Directories
+**/.artifacts/cache/
+**/.artifacts/temp/
+**/.artifacts/uploads/
+
+!**/.artifacts/docs
+!**/.artifacts/.gitkeep
 
 **/.cache/
+**/coverage/
+**/build/
+**/coverage/
+**/dist/
+**/out/
+**/logs/
+**/tmp/
 
-# Configuration Files
+## Development
 
-**/config.*
-**/*.config.*
+### Config Files
+**/.config/*.config.*
 
-**/*.env
-**/*.env.*
+!**/.config/default.config.*
+!**/.config/docker.config.*
+!**/.config/xtask.config.*
 
-### Exceptions
-!**/default.config.*
-!**/*.config.cjs
-!**/*.config.js
-!**/*.config.mjs
-!**/config.py
-!**/config.rs
+### dotenv
+*.env
+*.env.*
 
-!**/example.env.*
-!**/*.env.example
-!**/*.env.default
+!*default.env*
+!*.env.default
 
-# Dev
+!*example.env*
+!*.env.example
 
-### Idea
+### IDEs
 
+#### Atom
+**/.atom
+
+#### JetBrains
 **/.idea/
 
-### vscode
+*.iml
+*.ipr
+*.iws
 
-**/.vscode/*
+#### Visual Studio Code
+**/.vscode/
 
 !**/.vscode/settings.json
 
-# File Extensions
+## Operating Systems
 
-**/*.lock
-**/*.lock.*
+### Linux
 
-**/*-lock.*
+#### NixOS
+!**/flake.lock
 
-**/*.log
-**/*.log.*
+### Windows
 
-### Data Files
+#### Windows Subsystem for Linux (WSL)
+*:Zone.Identifier
 
-**/*.csv
-**/*.csv.*
-
-**/*.db
-**/*.db.*
-
-**/*.db-*.*
-
-**/*.zip
-**/*.zip.*
-
-## Rust
-**/debug/
-**/target/
-
-**/*.bk
-**/*.bk.*
-
-!**/Cargo.lock
-
-## Node
-**/build/
-**/debug/
-**/dist/
-**/node_modules/
-
-### SvelteKit
-**/__sapper__/
-**/.DS_STORE/
-**/.svelte-kit/
+# Language Specific
 
 ## Python
 **/__pycache__/
-**/.pytest_cache/
 **/venv/
 
-**/*.egg
-**/*.egg.*
+*.pyc
+*.pyc.*
 
-**/*.egg-info
+*.pyo
+*.pyd
 
-**/*.pyc
-**/*.pyc.*
+## Rust
+**/target
 
-**/*.pyo
-**/*.pyo.*
+!.cargo/config.toml
+!**/Cargo.lock
 
-**/*.pyz
-**/*.pyz.*
+*.rs.bk
 
-**/*.pyzw
-**/*.pyzw.*
+# *.lock
+*-lock.json
 
-**/*.whl
-**/*.whl.*
+## Node.JS
+**/.DS_STORE
+**/build
+**/node_modules
 
-## Operating Systems
+*.tsbuildinfo
 
-### Windows (WSL2)
-**/*:Zone.Identifier
+**/.pnp
+**/.pnp.*
+
+**/.yarn/install-state.gz
+
+### Frameworks
+
+#### Next.js
+**/.next
+**/out
+
+**/next-env.d.ts
+
+# Services
+
+## Vercel
+**/.vercel

@@ -1,0 +1,168 @@
+[package]
+build = "build.rs"
+description = "the core modules for the acme platform"
+name = "acme-core"
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[package.metadata.docs.rs]
+all-features = false
+features = ["default"]
+rustc-args = ["--cfg", "docsrs"]
+version = "v{{version}}"
+
+[package.metadata.release]
+no-dev-version = true
+tag-name = "{{version}}"
+
+[lib]
+bench = false
+
+[dependencies]
+contained = { workspace = true }
+# data & serialization
+serde = { features = ["derive"], optional = true, workspace = true }
+serde_derive = { optional = true, workspace = true }
+serde_json = { optional = true, workspace = true }
+# error handling
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+# macros
+paste = { workspace = true }
+smart-default = { workspace = true }
+strum = { features = ["derive"], workspace = true }
+# time
+chrono = { optional = true, workspace = true }
+time = { optional = true, workspace = true }
+# tracing
+tracing = { optional = true, workspace = true }
+# random
+getrandom = { optional = true, workspace = true }
+rand = { optional = true, workspace = true }
+rand_distr = { optional = true, workspace = true }
+uuid = { optional = true, workspace = true }
+# wasm
+wasm-bindgen = { optional = true, workspace = true }
+
+[features]
+default = [
+  "std",
+]
+
+full = [
+  "default",
+  "json",
+  "rand",
+  "serde",
+  "time",
+  "tracing",
+]
+
+# ************* [FF:Features] *************
+
+json = [
+  "alloc",
+  "serde",
+  "serde_json",
+]
+
+nightly = [
+  "contained/nightly",
+  "rand?/nightly",
+]
+
+time = [
+  "chrono",
+  "time_1",
+]
+
+# ************* [FF:Environments] *************
+std = [
+  "alloc",
+  "anyhow/std",
+  "contained/std",
+  "getrandom?/std",
+  "rand?/std",
+  "rand?/std_rng",
+  "serde?/std",
+  "serde_json?/std",
+  "strum/std",
+  "thiserror/std",
+  "time?/std",
+  "uuid?/std",
+]
+
+wasi = []
+
+wasm = [
+  "wasm_bindgen",
+  "chrono?/wasmbind",
+  "getrandom?/wasm_js",
+  "time?/wasm-bindgen",
+  "uuid?/js",
+]
+
+# ************* [FF:Dependencies] *************
+alloc = [
+  "chrono?/alloc",
+  "contained/alloc",
+  "rand?/alloc",
+  "rand_distr?/alloc",
+  "serde?/alloc",
+  "serde_json?/alloc",
+  "time?/alloc",
+  "wasm-bindgen?/gg-alloc",
+]
+
+
+chrono = [
+  "dep:chrono",
+  "std",
+]
+
+rand = [
+  "dep:rand",
+  "dep:rand_distr",
+  "rng",
+  "time?/rand",
+]
+
+rng = [
+  "dep:getrandom",
+  "rand?/small_rng",
+  "rand?/thread_rng",
+  "uuid?/v4",
+]
+
+serde = [
+  "dep:serde",
+  "dep:serde_derive",
+  "chrono?/serde",
+  "rand?/serde",
+  "rand_distr?/serde",
+  "time?/serde",
+]
+
+serde_json = [
+  "dep:serde_json"
+]
+
+time_1 = ["dep:time"]
+
+tracing = ["dep:tracing"]
+
+uuid = [
+  "dep:uuid",
+  "rng",
+]
+
+wasm_bindgen = ["dep:wasm-bindgen"]
