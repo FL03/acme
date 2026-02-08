@@ -40,7 +40,7 @@ rustup toolchain install nightly
 If necessary, add the `wasm32-*` target(s) if you plan to compile for WebAssembly:
 
 ```bash
-rustup target add wasm32-unknown-unknown wasm32-p1 wasm32-p2
+rustup target add wasm32-unknown-unknown wasm32-wasip1 wasm32-wasip2
 ```
 
 ## Building from the source
@@ -60,11 +60,11 @@ cd acme
 Once you're in the project directory, you can build the project using `cargo`:
 
 ```bash
-cargo build --workspace --release --all-features
+cargo build -r --locked --workspace --features full
 ```
 
 Or, if you want to run the tests, you can use:
 
 ```bash
-cargo test --workspace --release --all-features
+cargo test -r --locked --workspace --features full
 ```

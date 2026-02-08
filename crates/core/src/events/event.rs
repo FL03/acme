@@ -2,8 +2,8 @@
     Appellation: event <module>
     Contrib: @FL03
 */
-use core::marker::PhantomData;
 use crate::Timestamp;
+use core::marker::PhantomData;
 
 #[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

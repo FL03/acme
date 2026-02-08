@@ -4,12 +4,12 @@
 */
 //! This module implements the [`Component`] and related types
 #[doc(inline)]
-pub use self::component::*;
+pub use self::{component::*, interface::*};
 
-pub mod component;
-pub mod interface;
+mod component;
+mod interface;
 
+// prelude (local)
 pub(crate) mod prelude {
-    #[doc(inline)]
     pub use super::component::*;
 }

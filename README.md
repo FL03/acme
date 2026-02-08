@@ -2,7 +2,7 @@
 
 [![crates.io](https://img.shields.io/crates/v/acme?logo=rust&style=for-the-badge)](https://crates.io/crates/acme)
 [![docs.rs](https://img.shields.io/docsrs/acme?style=for-the-badge&logo=rust)](https://docs.rs/acme)
-![creates.io (License)](https://img.shields.io/crates/l/acme?logo=rust&style=for-the-badge)
+[![GitHub License](https://img.shields.io/github/license/FL03/template-nextjs-app?style=for-the-badge&logo=github)](LICENSE)
 
 ***
 
@@ -56,13 +56,13 @@ cd acme
 To build the project, you can use the following command:
 
 ```bash
-cargo build --all-features --workspace [--release]
+cargo build -r --locked --workspace --features full
 ```
 
 To run the tests, you can use the following command:
 
 ```bash
-cargo test --all-features --workspace
+cargo test -r --locked --workspace --features full
 ```
 
 ## Usage
@@ -72,12 +72,10 @@ Add this to your `Cargo.toml`:
 ```toml
 [dependencies.acme]
 features = []
-version = "0.4.0"
+version = "0.4.x"
 ```
 
-### Examples
-
-#### _Basic Usage_
+### _Basic Usage_
 
 ```rust
     use acme::engine::Engine;
@@ -105,4 +103,4 @@ version = "0.4.0"
 
 ## License
 
-This project is [licensed](https://github.com/FL03/acme/blob/main/LICENSE) under the [Apache-2.0](https://opensource.org/license/apache-2-0).
+This project is [licensed](LICENSE) under the [Apache-2.0](https://opensource.org/license/apache-2-0).

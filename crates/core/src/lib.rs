@@ -56,12 +56,11 @@ mod utils {
 }
 // re-exports
 #[doc(inline)]
-pub use acme_traits::prelude::*;
-#[doc(inline)]
 pub use self::{
-    comp::prelude::*, consts::*, error::*, events::prelude::*, time::Timestamp,
-    types::*, utils::*,
+    comp::prelude::*, consts::*, error::*, events::prelude::*, time::Timestamp, types::*, utils::*,
 };
+#[doc(inline)]
+pub use acme_traits::prelude::*;
 // prelude
 #[doc(hidden)]
 pub mod prelude {

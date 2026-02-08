@@ -4,7 +4,6 @@
     Contrib: @FL03
 */
 
-
 pub trait Now {
     type Output;
 

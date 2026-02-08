@@ -4,7 +4,7 @@
     Contrib: @FL03
 */
 #[doc(inline)]
-pub use self::{ts::*, traits::*, utils::*};
+pub use self::{traits::*, ts::*, utils::*};
 
 mod ts;
 pub mod utils;
@@ -23,6 +23,6 @@ mod traits {
 
 // prelude (local)
 pub(crate) mod prelude {
-    pub use super::ts::*;
     pub use super::traits::*;
+    pub use super::ts::*;
 }
