@@ -26,7 +26,7 @@ let
   };
 
   common = {
-    version = "0.0.1";
+    version = "0.4.1";
     src = self;
 
     cargoLock = {

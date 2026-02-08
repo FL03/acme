@@ -26,32 +26,12 @@ pub(crate) mod macros {
 }
 // modules
 pub mod comp;
+pub mod consts;
 pub mod error;
 pub mod events;
-
-mod consts {
-    #[doc(hidden)]
-    pub const VERSION: &str = env!("CARGO_PKG_VERSION");
-}
-
-mod traits {
-    //! this module provides common traits and interfaces for the `acme` engine
-    #[doc(inline)]
-    pub use self::prelude::*;
-
-    mod context;
-    mod handle;
-
-    mod prelude {
-        #[doc(inline)]
-        pub use super::context::*;
-        #[doc(inline)]
-        pub use super::handle::*;
-    }
-}
+pub mod time;
 
 mod types {
-    //! this module implements various types used for the `acme` engine
     #[doc(inline)]
     pub use self::prelude::*;
 
@@ -64,7 +44,6 @@ mod types {
 }
 
 mod utils {
-    //! this module defines additional utilities for the `acme` engine
     #[doc(inline)]
     pub use self::prelude::*;
 
@@ -77,8 +56,11 @@ mod utils {
 }
 // re-exports
 #[doc(inline)]
+pub use acme_traits::prelude::*;
+#[doc(inline)]
 pub use self::{
-    comp::prelude::*, consts::*, error::*, events::prelude::*, traits::*, types::*, utils::*,
+    comp::prelude::*, consts::*, error::*, events::prelude::*, time::Timestamp,
+    types::*, utils::*,
 };
 // prelude
 #[doc(hidden)]
@@ -86,7 +68,7 @@ pub mod prelude {
     pub use crate::comp::prelude::*;
     pub use crate::consts::*;
     pub use crate::events::prelude::*;
-    pub use crate::traits::*;
+    pub use crate::time::prelude::*;
     pub use crate::types::*;
     pub use crate::utils::*;
 }

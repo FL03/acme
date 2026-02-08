@@ -13,11 +13,12 @@ async fn main() -> acme::Result<()> {
         .with_max_level(tracing::Level::TRACE)
         .with_thread_ids(false)
         .with_target(true)
-        .with_timer(tracing_subscriber::fmt::time::d)
+        .with_timer(tracing_subscriber::fmt::time::time())
         .compact()
         .init();
+
     // verify the tracing layers are initialized
-    tracing::info!("Welcome to {name}", name = acme::consts::VERSION);
+    tracing::info!("Welcome to acme {v}", v = acme::consts::VERSION);
     // initialize a new instance of the engine
     let acme = Engine::new()?;
     // start the engine's scheduler

@@ -3,7 +3,7 @@
     Contrib: @FL03
 */
 use core::marker::PhantomData;
-use scsys::Timestamp;
+use crate::Timestamp;
 
 #[derive(Clone, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

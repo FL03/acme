@@ -19,7 +19,7 @@ pub struct Interface<T> {
 }
 
 contained::fmt_wrapper! {
-    Interface<T>.inner::(
+    impl Interface<T>.inner {
         Debug,
         Display,
         Binary,
@@ -28,6 +28,6 @@ contained::fmt_wrapper! {
         LowerHex,
         UpperHex,
         Octal,
-        Pointer,    
-    )
+        Pointer,
+    }
 }

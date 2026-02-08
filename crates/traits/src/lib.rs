@@ -29,13 +29,16 @@ pub(crate) mod macros {
     pub mod seal;
 }
 // modules
-
 pub mod component;
+pub mod context;
+pub mod handle;
 // re-exports
 #[doc(inline)]
-pub use self::component::Component;
+pub use self::{component::*, context::*, handle::*};
 // prelude
 #[doc(hidden)]
 pub mod prelude {
     pub use crate::component::*;
+    pub use crate::context::*;
+    pub use crate::handle::*;
 }

@@ -28,6 +28,9 @@ tag-name = "{{version}}"
 bench = false
 
 [dependencies]
+# internal
+acme-traits = { workspace = true }
+# custom
 contained = { workspace = true }
 # data & serialization
 serde = { features = ["derive"], optional = true, workspace = true }
@@ -75,20 +78,24 @@ json = [
   "serde_json",
 ]
 
-nightly = [
-  "contained/nightly",
-  "rand?/nightly",
-]
-
 time = [
   "chrono",
   "time_1",
 ]
 
 # ************* [FF:Environments] *************
+nightly = [
+  "acme-traits/nightly",
+  "contained/nightly",
+  "rand?/nightly",
+]
+
 std = [
   "alloc",
+  "acme-traits/std",
   "anyhow/std",
+  "chrono?/std",
+  "chrono?/default",
   "contained/std",
   "getrandom?/std",
   "rand?/std",
@@ -101,10 +108,13 @@ std = [
   "uuid?/std",
 ]
 
-wasi = []
+wasi = [
+  "acme-traits/wasi",
+]
 
 wasm = [
   "wasm_bindgen",
+  "acme-traits/wasm",
   "chrono?/wasmbind",
   "getrandom?/wasm_js",
   "time?/wasm-bindgen",
@@ -113,6 +123,7 @@ wasm = [
 
 # ************* [FF:Dependencies] *************
 alloc = [
+  "acme-traits/alloc",
   "chrono?/alloc",
   "contained/alloc",
   "rand?/alloc",
@@ -123,7 +134,6 @@ alloc = [
   "wasm-bindgen?/gg-alloc",
 ]
 
-
 chrono = [
   "dep:chrono",
   "std",
@@ -133,11 +143,13 @@ rand = [
   "dep:rand",
   "dep:rand_distr",
   "rng",
+  "acme-traits/rand",
   "time?/rand",
 ]
 
 rng = [
   "dep:getrandom",
+  "acme-traits/rng",
   "rand?/small_rng",
   "rand?/thread_rng",
   "uuid?/v4",
@@ -146,6 +158,7 @@ rng = [
 serde = [
   "dep:serde",
   "dep:serde_derive",
+  "acme-traits/serde",
   "chrono?/serde",
   "rand?/serde",
   "rand_distr?/serde",
@@ -165,4 +178,8 @@ uuid = [
   "rng",
 ]
 
-wasm_bindgen = ["dep:wasm-bindgen"]
+wasm_bindgen = [
+  "dep:wasm-bindgen",
+  "acme-traits/wasm_bindgen",
+  "chrono?/wasm-bindgen",
+]

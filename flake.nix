@@ -15,7 +15,7 @@
       {
         packages.default = rustPlatform.buildRustPackage {
           pname = "acme";
-          version = "0.4.0";
+          version = "0.4.1";
           src = "./.";
           # If Cargo.lock doesn't exist yet, remove or comment out this block:
           cargoLock = {
@@ -27,6 +27,7 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.cargo-binstall
+            pkgs.cargo-crtierion
             pkgs.cargo-watch
             pkgs.cargo-nextest
             pkgs.clippy

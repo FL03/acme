@@ -20,6 +20,7 @@ dependencies = [
 name = "acme-core"
 version = "0.4.1"
 dependencies = [
+ "acme-traits",
  "anyhow",
  "chrono",
  "contained",
