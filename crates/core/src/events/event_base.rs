@@ -13,14 +13,3 @@ pub struct EventBase<T, K> {
     pub(crate) timestamp: Timestamp,
     pub(crate) _type: PhantomData<K>,
 }
-
-impl<K, T> EventBase<T, K> {
-    pub fn new(data: T) -> Self {
-        Self {
-            data,
-            message: Vec::new(),
-            timestamp: Timestamp::now(),
-            _type: PhantomData::<K>,
-        }
-    }
-}

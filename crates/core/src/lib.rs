@@ -30,6 +30,7 @@ pub mod consts;
 pub mod error;
 pub mod events;
 pub mod time;
+pub mod utils;
 
 mod types {
     #[doc(inline)]
@@ -43,17 +44,6 @@ mod types {
     }
 }
 
-mod utils {
-    #[doc(inline)]
-    pub use self::prelude::*;
-
-    mod generate;
-
-    mod prelude {
-        #[doc(inline)]
-        pub use super::generate::*;
-    }
-}
 // re-exports
 #[doc(inline)]
 pub use self::{

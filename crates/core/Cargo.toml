@@ -58,6 +58,7 @@ wasm-bindgen = { optional = true, workspace = true }
 
 [features]
 default = [
+  "events",
   "std",
 ]
 
@@ -71,6 +72,10 @@ full = [
 ]
 
 # ************* [FF:Features] *************
+
+events = [
+  "alloc"
+]
 
 json = [
   "alloc",
