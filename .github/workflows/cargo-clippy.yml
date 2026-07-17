@@ -1,4 +1,4 @@
-name: Clippy
+name: clippy
 
 concurrency:
   cancel-in-progress: false
@@ -6,24 +6,12 @@ concurrency:
 
 on:
   pull_request:
-    branches:
-      - main
-      - $default-branch
-    types:
-      - opened
-      - reopened
-      - synchronize
+    types: [auto_merge_enabled, opened, ready_for_review, reopened]
   push:
-    branches:
-      - main
-      - $default-branch
-    tags:
-      - v*.*.*
-      - "*-nightly"
-  release:
-    types: [ created, edited ]
+    branches: [main, master]
+    tags: [latest, v*.*.*, "*-nightly"]
   repository_dispatch:
-    types: [ clippy, cargo-clippy ]
+    types: [clippy, cargo-clippy]
   workflow_dispatch:
 
 jobs:
@@ -35,31 +23,29 @@ jobs:
       security-events: write
       statuses: write
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Setup Rust
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          repository: ${{ github.repository }}
+          ref: ${{ github.event.client_payload.ref || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          components: clippy, rustfmt
-          toolchain: nightly
-          override: true
-      -
-        name: Setup the for sarif output
-        run: cargo install clippy-sarif sarif-fmt
-      -
-        name: Run Clippy
-        run:
-          cargo clippy
-          --all-features
-          --workspace
-          --message-format=json | clippy-sarif | tee rust-clippy-results.sarif | sarif-fmt
-      -
-        name: Upload analysis
-        uses: github/codeql-action/upload-sarif@v3
-        continue-on-error: true
+          components: clippy,rustfmt
+      - name: Install SARIF tools
+        uses: taiki-e/install-action@v2
+        with:
+          tool: clippy-sarif sarif-fmt
+      - name: Run cargo clippy
+        run: |
+          cargo clippy \
+            --features full \
+            --message-format=json | clippy-sarif | tee rust-clippy-results.sarif | sarif-fmt
+      - name: Upload the results
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: rust-clippy-results.sarif
           wait-for-processing: true

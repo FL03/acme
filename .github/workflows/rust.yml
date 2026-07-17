@@ -1,108 +1,119 @@
-name: Rust
+name: rust
 
 concurrency:
   cancel-in-progress: false
   group: ${{ github.workflow }}-${{ github.ref }}
 
+on:
+  pull_request:
+    branches: [main, master]
+    types: [synchronize]
+  push:
+    branches: [main, master]
+    tags: [latest, v*, "*-nightly"]
+  repository_dispatch:
+    types: [rust, rust-ci]
+  release:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        default: stable
+        description: "Select a toolchain to test (stable, nightly, beta)"
+        required: true
+        type: choice
+        options: [stable, nightly, beta]
+      rust-version:
+        default: 1.93.0
+        description: "Select a Rust version to use for release builds"
+        required: false
+        type: string
+# environment variables available to all jobs and steps
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: full
-
-on:
-  pull_request:
-    branches:
-      - main
-      - $default-branch
-    types:
-      - opened
-      - reopened
-      - synchronize
-  push:
-    branches:
-      - main
-      - $default-branch
-    tags:
-      - v*.*.*
-      - "*-nightly"
-  repository_dispatch:
-    types: [ rust ]
-  workflow_dispatch:
-    inputs:
-      benchmark:
-        default: false
-        description: 'Run benchmarks'
-        required: true
-        type: boolean
-
+  RUST_TOOLCHAIN: ${{ github.event.inputs.toolchain || 'stable' }}
+# permissions enabled for all jobs
+permissions:
+  contents: read
+# the ci jobs to run
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        target: [ x86_64-unknown-linux-gnu ]
+        target: [x86_64-unknown-linux-gnu]
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Setup Rust
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           target: ${{ matrix.target }}
-      -
-        name: Build the workspace
-        run: cargo build --release --locked --workspace --features full --target ${{ matrix.target }}
-  benchmark:
-    if: ${{ inputs.benchmark || github.event_name == 'push' }}
-    runs-on: ubuntu-latest
-    outputs:
-      digest: ${{ steps.cargo-bench.outputs.digest }}
-      id: ${{ steps.cargo-bench.outputs.id }}
-      url: ${{ steps.cargo-bench.outputs.url }}
-    permissions:
-      actions: read
-      contents: write
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.ref }}
-          repository: ${{ github.repository }}
-      -
-        name: Benchmark the workspace
-        id: cargo-bench
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          event-type: cargo-bench
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
-          token: ${{ github.token }}
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          override: true
+      - name: Build the workspace
+        run: cargo build -r --locked --workspace --features full --all-targets
   test:
+    # core tests that should pass work anywhere
     needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        features:  [ full, default ]
-        target: [ x86_64-unknown-linux-gnu ]
+        features: [full, default]
+        target: [x86_64-unknown-linux-gnu]
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Setup Rust
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           target: ${{ matrix.target }}
-      -
-        name: Test (${{ matrix.features }})
-        if: matrix.features != 'default' && matrix.features != 'all'
-        run: cargo test -r --locked --workspace --target ${{ matrix.target }} --features ${{ matrix.features }}
-      -
-        name: Test (default)
-        if: matrix.features == 'default'
-        run: cargo test -r --locked --workspace --target ${{ matrix.target }}
+          toolchain: stable
+          override: true
+      - name: Test (${{ matrix.features }})
+        run: cargo test -r --locked --workspace --target ${{ matrix.target}} --features ${{ matrix.features }}
+  test_nightly:
+    # special cases for testing nightly features (i.e. no_std, alloc, etc.)
+    if: github.env.RUST_TOOLCHAIN == 'nightly' || false
+    continue-on-error: true
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x86_64-unknown-linux-gnu]
+        features:
+          - all
+          - no_std
+          - "alloc,nightly"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          toolchain: nightly
+          override: true
+      - name: Test (all-features)
+        if: matrix.features == 'all'
+        run: cargo test -r --locked --all-features --workspace  --target ${{ matrix.target }}
+      - name: Test (no_std)
+        continue-on-error: true
+        if: matrix.features == 'no_std'
+        run: cargo test -r --locked --no-default-features --workspace --target ${{ matrix.target }}
+        env:
+          RUSTFLAGS: "-C panic=abort -Z panic_abort_tests"
+      - name: Test (${{ matrix.features }})
+        continue-on-error: true
+        if: matrix.features != 'all' && matrix.features != 'no_std'
+        run: cargo test -r --locked --no-default-features --workspace --features ${{ matrix.features }} --target ${{ matrix.target }}
+        env:
+          RUSTFLAGS: "-C panic=abort -Z panic_abort_tests"

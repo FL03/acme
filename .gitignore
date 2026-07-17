@@ -1,112 +1,137 @@
-# Artifacts
+# General
+*.bk
+*.bk.*
 
-**/.artifacts/data/
-**/.docker/data/
+*.db
+*.db.*
 
+*.log
+*.log.*
 
-## Caches
+*.pem
+*.pem.*
+
+*.gz
+*.gz.*
+
+*.sqlite
+*.sqlite.*
+
+*.sqlite3
+*.sqlite3.*
+
+*.zip
+*.zip.*
+
+## Directories
+**/.artifacts/cache/
+**/.artifacts/temp/
+**/.artifacts/uploads/
+
+!**/.artifacts/docs
+!**/.artifacts/.gitkeep
 
 **/.cache/
+**/coverage/
+**/build/
+**/coverage/
+**/dist/
+**/out/
+**/logs/
+**/tmp/
 
-# Configuration Files
+## Development
 
-**/config.*
-**/*.config.*
+### Config Files
+**/.config/*.config.*
 
-**/*.env
-**/*.env.*
+!**/.config/default.config.*
+!**/.config/docker.config.*
+!**/.config/xtask.config.*
 
-### Exceptions
-!**/default.config.*
-!**/*.config.cjs
-!**/*.config.js
-!**/*.config.mjs
-!**/config.py
-!**/config.rs
+### dotenv
+*.env
+*.env.*
 
-!**/example.env.*
-!**/*.env.example
-!**/*.env.default
+!*default.env*
+!*.env.default
 
-# Dev
+!*example.env*
+!*.env.example
 
-### Idea
+### IDEs
 
+#### Atom
+**/.atom
+
+#### JetBrains
 **/.idea/
 
-### vscode
+*.iml
+*.ipr
+*.iws
 
+#### Visual Studio Code
 **/.vscode/
 
-# File Extensions
-
-**/*.lock
-**/*.lock.*
-
-**/*-lock.*
-
-**/*.log
-**/*.log.*
-
-### Data Files
-
-**/*.csv
-**/*.csv.*
-
-**/*.db
-**/*.db.*
-
-**/*.db-*.*
-
-**/*.zip
-**/*.zip.*
-
-## Rust
-**/debug/
-**/target/
-
-**/*.bk
-**/*.bk.*
-
-!Cargo.lock
-
-## Node
-**/build/
-**/debug/
-**/dist/
-**/node_modules/
-
-### SvelteKit
-**/__sapper__/
-**/.DS_STORE/
-**/.svelte-kit/
-
-## Python
-**/__pycache__/
-**/.pytest_cache/
-**/venv/
-
-**/*.egg
-**/*.egg.*
-
-**/*.egg-info
-
-**/*.pyc
-**/*.pyc.*
-
-**/*.pyo
-**/*.pyo.*
-
-**/*.pyz
-**/*.pyz.*
-
-**/*.pyzw
-**/*.pyzw.*
-
-**/*.whl
-**/*.whl.*
+!**/.vscode/settings.json
 
 ## Operating Systems
 
-### Windows (WSL2)
-**/*:Zone.Identifier
+### Linux
+
+#### NixOS
+!**/flake.lock
+
+### Windows
+
+#### Windows Subsystem for Linux (WSL)
+*:Zone.Identifier
+
+# Language Specific
+
+## Python
+**/__pycache__/
+**/venv/
+
+*.pyc
+*.pyc.*
+
+*.pyo
+*.pyd
+
+## Rust
+**/target
+
+!.cargo/config.toml
+!**/Cargo.lock
+
+*.rs.bk
+
+# *.lock
+*-lock.json
+
+## Node.JS
+**/.DS_STORE
+**/build
+**/node_modules
+
+*.tsbuildinfo
+
+**/.pnp
+**/.pnp.*
+
+**/.yarn/install-state.gz
+
+### Frameworks
+
+#### Next.js
+**/.next
+**/out
+
+**/next-env.d.ts
+
+# Services
+
+## Vercel
+**/.vercel

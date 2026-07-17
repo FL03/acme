@@ -1,0 +1,73 @@
+name: wasm
+
+concurrency:
+  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+on:
+  repository_dispatch:
+    types: [wasm, wasm-ci]
+  workflow_dispatch:
+    inputs:
+      toolchain:
+        default: stable
+        description: "Select a toolchain to test (stable, nightly, beta)"
+        required: true
+        type: choice
+        options: [stable, nightly, beta]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: full
+
+permissions:
+  contents: read
+
+jobs:
+  components:
+    runs-on: ubuntu-latest
+    env:
+      RUST_TOOLCHAIN: ${{ github.event.inputs.toolchain || 'stable' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [wasm32-wasip1, wasm32-wasip2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Setup dependencies
+        run: sudo apt-get install -y pkg-config libssl-dev build-essential
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          cache-key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          target: ${{ matrix.target }}
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          override: true
+      - name: Setup cargo-component
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-component
+      - name: Build
+        if: matrix.target == 'wasm32-wasip1'
+        run: |
+          cargo component build -r --locked --workspace \
+            --features full \
+            --exclude pzzld-node \
+            --exclude pzzld-ppm  \
+            --target ${{ matrix.target }}
+      - name: Build
+        if: matrix.target == 'wasm32-wasip2'
+        run: |
+          cargo build -r --locked --workspace \
+            --features full \
+            --exclude pzzld-node \
+            --exclude pzzld-ppm  \
+            --target ${{ matrix.target }}
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: components-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/*.wasm
