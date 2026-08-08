@@ -55,7 +55,7 @@ thiserror = { default-features = false, version = "2" }
 lazy_static = { version = "1" }
 paste = { version = "1" }
 smart-default = { version = "0.7" }
-strum = { default-features = false, features = ["derive"], version = "0.27" }
+strum = { default-features = false, features = ["derive"], version = "0.28" }
 # serialization
 bincode = { default-features = false, version = "2" }
 serde = { default-features = false, features = ["derive"], version = "1" }
